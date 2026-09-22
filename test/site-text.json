@@ -1,0 +1,2387 @@
+{
+ "pages": [
+  {
+   "name": "Home (landing page)",
+   "hash": "#/",
+   "blocks": [
+    {
+     "t": "eyebrow",
+     "v": "INDEPENDENT EQUITY RESEARCH"
+    },
+    {
+     "t": "h1",
+     "v": "Patient research for impatient markets."
+    },
+    {
+     "t": "p",
+     "v": "Long-form equity writeups — initiations, updates, and post-mortems — built from primary filings, management transcripts, and our own models. No thesis is published without the condition that would prove it wrong."
+    },
+    {
+     "t": "a",
+     "v": "REQUEST ACCESS"
+    },
+    {
+     "t": "a",
+     "v": "READ THE LIBRARY →"
+    },
+    {
+     "t": "cite",
+     "v": "PRAJIT RESEARCH, FOUNDING NOTE"
+    },
+    {
+     "t": "b",
+     "v": "24"
+    },
+    {
+     "t": "span",
+     "v": "WRITEUPS PUBLISHED"
+    },
+    {
+     "t": "b",
+     "v": "18"
+    },
+    {
+     "t": "span",
+     "v": "NAMES UNDER COVERAGE"
+    },
+    {
+     "t": "b",
+     "v": "3–5 yr"
+    },
+    {
+     "t": "span",
+     "v": "TYPICAL HOLDING HORIZON"
+    },
+    {
+     "t": "b",
+     "v": "2026"
+    },
+    {
+     "t": "span",
+     "v": "ESTABLISHED"
+    },
+    {
+     "t": "eyebrow",
+     "v": "PHILOSOPHY"
+    },
+    {
+     "t": "h2",
+     "v": "What we believe the edge is"
+    },
+    {
+     "t": "p",
+     "v": "We read what the market has stopped reading. The edge is not information — it is the willingness to sit with a filing longer than anyone else, and the discipline to write down, in advance, what would make us sell."
+    },
+    {
+     "t": "h3",
+     "v": "Primary sources only"
+    },
+    {
+     "t": "p",
+     "v": "Every number in a writeup traces to a filing, a transcript, or a model we built. We do not cite sell-side targets, and we do not repeat consensus we have not reconstructed."
+    },
+    {
+     "t": "h3",
+     "v": "Every thesis has a kill condition"
+    },
+    {
+     "t": "p",
+     "v": "Before a note is published it carries the specific, observable event that would falsify it. When that event occurs, the note is updated — and the position is exited — whether or not the price has moved."
+    },
+    {
+     "t": "h3",
+     "v": "Time is the edge"
+    },
+    {
+     "t": "p",
+     "v": "We underwrite for three to five years, which lets us own businesses through the quarters in which nobody else wants to. Patience is not a slogan here; it is the entire model."
+    },
+    {
+     "t": "eyebrow",
+     "v": "PROCESS"
+    },
+    {
+     "t": "h2",
+     "v": "Six steps, always in order"
+    },
+    {
+     "t": "p",
+     "v": "The same six steps, in the same order, for every name. The sequence is the product."
+    },
+    {
+     "t": "h3",
+     "v": "Screen"
+    },
+    {
+     "t": "p",
+     "v": "A quantitative pass for businesses with durable returns on capital, sensible balance sheets, and an ownership structure that rewards patience. The screen removes names; it never adds conviction."
+    },
+    {
+     "t": "h3",
+     "v": "Read"
+    },
+    {
+     "t": "p",
+     "v": "Ten years of filings, proxies, and transcripts, in order. We are looking for the year management stopped explaining something."
+    },
+    {
+     "t": "h3",
+     "v": "Model"
+    },
+    {
+     "t": "p",
+     "v": "A unit-economics model built from the operating drivers up, not a revenue line extrapolated forward. Scenarios are weighted, and the bear case is written first."
+    },
+    {
+     "t": "h3",
+     "v": "Write"
+    },
+    {
+     "t": "p",
+     "v": "The writeup states the thesis in one paragraph, the valuation in one table, and the kill condition in one sentence. If any of the three cannot be written plainly, the note is not ready."
+    },
+    {
+     "t": "h3",
+     "v": "Publish"
+    },
+    {
+     "t": "p",
+     "v": "Notes go to subscribers first, then members, then — for selected pieces — the public library. Every note carries a disclosure of any position held."
+    },
+    {
+     "t": "h3",
+     "v": "Revisit"
+    },
+    {
+     "t": "p",
+     "v": "Each quarter, and on any kill-condition event, the note is updated. When we were wrong, the post-mortem is published with the same prominence as the original."
+    },
+    {
+     "t": "eyebrow",
+     "v": "RESEARCH"
+    },
+    {
+     "t": "h2",
+     "v": "Latest writeups"
+    },
+    {
+     "t": "a",
+     "v": "FULL LIBRARY →"
+    },
+    {
+     "t": "p",
+     "v": "The one-sentence test each note must pass before publication, and why it matters more than the price target."
+    },
+    {
+     "t": "small",
+     "v": "Methodology · 6 min"
+    },
+    {
+     "t": "span",
+     "v": "FREE"
+    },
+    {
+     "t": "p",
+     "v": "A pricing-cycle call that was right on direction and wrong on duration — and what it changed in our model."
+    },
+    {
+     "t": "small",
+     "v": "Financials · 9 min"
+    },
+    {
+     "t": "span",
+     "v": "FREE"
+    },
+    {
+     "t": "p",
+     "v": "Why route density, not scale, is the moat — and how to tell which distributors actually have it."
+    },
+    {
+     "t": "small",
+     "v": "Industrials · 22 min"
+    },
+    {
+     "t": "span",
+     "v": "MEMBER"
+    },
+    {
+     "t": "p",
+     "v": "Separating the banks whose low-cost deposits survived the cycle from those that merely reported them."
+    },
+    {
+     "t": "small",
+     "v": "Financials · 31 min"
+    },
+    {
+     "t": "span",
+     "v": "SUBSCRIBER"
+    },
+    {
+     "t": "eyebrow",
+     "v": "ACCESS"
+    },
+    {
+     "t": "h2",
+     "v": "Three ways to read"
+    },
+    {
+     "t": "eyebrow",
+     "v": "GUEST"
+    },
+    {
+     "t": "small",
+     "v": "NO ACCOUNT"
+    },
+    {
+     "t": "li",
+     "v": "Summaries of every writeup"
+    },
+    {
+     "t": "li",
+     "v": "Selected notes in full, marked Free"
+    },
+    {
+     "t": "li",
+     "v": "Disclaimer and methodology pages"
+    },
+    {
+     "t": "a",
+     "v": "BROWSE THE LIBRARY"
+    },
+    {
+     "t": "eyebrow",
+     "v": "MEMBER"
+    },
+    {
+     "t": "small",
+     "v": "REGISTERED ACCOUNT"
+    },
+    {
+     "t": "li",
+     "v": "Everything in Guest"
+    },
+    {
+     "t": "li",
+     "v": "Notes marked Member in full"
+    },
+    {
+     "t": "li",
+     "v": "Email alert on every new writeup and update"
+    },
+    {
+     "t": "a",
+     "v": "CREATE A MEMBER ACCOUNT"
+    },
+    {
+     "t": "eyebrow",
+     "v": "SUBSCRIBER"
+    },
+    {
+     "t": "small",
+     "v": "ANNUAL"
+    },
+    {
+     "t": "li",
+     "v": "Everything in Member"
+    },
+    {
+     "t": "li",
+     "v": "Every initiation and update in full, on publication day"
+    },
+    {
+     "t": "li",
+     "v": "Downloadable models (xlsx) and the quarterly call"
+    },
+    {
+     "t": "a",
+     "v": "REQUEST SUBSCRIBER ACCESS"
+    },
+    {
+     "t": "eyebrow",
+     "v": "ABOUT"
+    },
+    {
+     "t": "h2",
+     "v": "Independent, by design"
+    },
+    {
+     "t": "p",
+     "v": "Prajit Research is an independent equity research practice. We have no banking relationships, accept no issuer payment, and publish our positions."
+    },
+    {
+     "t": "p",
+     "v": "[Founder bio — two or three sentences: background, prior firms, credentials, and why this practice exists. Replace this placeholder before launch.]"
+    },
+    {
+     "t": "p",
+     "v": "Institutional readers, allocators, and press can reach us through the access form or by email."
+    },
+    {
+     "t": "a",
+     "v": "REQUEST ACCESS"
+    }
+   ]
+  },
+  {
+   "name": "Research library",
+   "hash": "#/research",
+   "blocks": [
+    {
+     "t": "eyebrow",
+     "v": "RESEARCH LIBRARY"
+    },
+    {
+     "t": "h2",
+     "v": "Every writeup, dated and versioned"
+    },
+    {
+     "t": "p",
+     "v": "Summaries are open to everyone. Full notes open according to their access level — Free, Member, or Subscriber."
+    },
+    {
+     "t": "button",
+     "v": "ALL"
+    },
+    {
+     "t": "button",
+     "v": "FRAMEWORK"
+    },
+    {
+     "t": "button",
+     "v": "POST-MORTEM"
+    },
+    {
+     "t": "button",
+     "v": "DEEP DIVE"
+    },
+    {
+     "t": "button",
+     "v": "INITIATION"
+    },
+    {
+     "t": "button",
+     "v": "UPDATE"
+    },
+    {
+     "t": "field",
+     "v": "Search titles, sectors…"
+    },
+    {
+     "t": "p",
+     "v": "The one-sentence test each note must pass before publication, and why it matters more than the price target."
+    },
+    {
+     "t": "small",
+     "v": "Methodology · 6 min"
+    },
+    {
+     "t": "span",
+     "v": "FREE"
+    },
+    {
+     "t": "p",
+     "v": "A pricing-cycle call that was right on direction and wrong on duration — and what it changed in our model."
+    },
+    {
+     "t": "small",
+     "v": "Financials · 9 min"
+    },
+    {
+     "t": "span",
+     "v": "FREE"
+    },
+    {
+     "t": "p",
+     "v": "Why route density, not scale, is the moat — and how to tell which distributors actually have it."
+    },
+    {
+     "t": "small",
+     "v": "Industrials · 22 min"
+    },
+    {
+     "t": "span",
+     "v": "MEMBER"
+    },
+    {
+     "t": "p",
+     "v": "Separating the banks whose low-cost deposits survived the cycle from those that merely reported them."
+    },
+    {
+     "t": "small",
+     "v": "Financials · 31 min"
+    },
+    {
+     "t": "span",
+     "v": "SUBSCRIBER"
+    },
+    {
+     "t": "p",
+     "v": "Labour cost gets the headlines; contract density and case mix decide the margin."
+    },
+    {
+     "t": "small",
+     "v": "Healthcare · 27 min"
+    },
+    {
+     "t": "span",
+     "v": "MEMBER"
+    },
+    {
+     "t": "p",
+     "v": "An update to the initiation: the supply response is slower than our bear case assumed, and the kill condition has not triggered."
+    },
+    {
+     "t": "small",
+     "v": "Semiconductors · 11 min"
+    },
+    {
+     "t": "span",
+     "v": "SUBSCRIBER"
+    }
+   ]
+  },
+  {
+   "name": "Sign in",
+   "hash": "#/signin",
+   "blocks": [
+    {
+     "t": "eyebrow",
+     "v": "SIGN IN"
+    },
+    {
+     "t": "h2",
+     "v": "No password. We email you a link."
+    },
+    {
+     "t": "p",
+     "v": "Enter your email and we send a one-time sign-in link. New readers get a free member account automatically."
+    },
+    {
+     "t": "p",
+     "v": "Member access is free and opens every note marked Member. Subscriber access is granted by the research desk after a request."
+    },
+    {
+     "t": "label",
+     "v": "EMAIL"
+    },
+    {
+     "t": "field",
+     "v": "you@firm.com"
+    },
+    {
+     "t": "label",
+     "v": "NAME (FOR NEW ACCOUNTS)"
+    },
+    {
+     "t": "field",
+     "v": "Full name"
+    },
+    {
+     "t": "label",
+     "v": "FIRM (OPTIONAL)"
+    },
+    {
+     "t": "field",
+     "v": "Fund, family office, or independent"
+    },
+    {
+     "t": "button",
+     "v": "EMAIL ME A SIGN-IN LINK"
+    },
+    {
+     "t": "a",
+     "v": "Disclaimer"
+    },
+    {
+     "t": "a",
+     "v": "Terms"
+    }
+   ]
+  },
+  {
+   "name": "Request access",
+   "hash": "#/access",
+   "blocks": [
+    {
+     "t": "eyebrow",
+     "v": "REQUEST ACCESS"
+    },
+    {
+     "t": "h2",
+     "v": "Tell us who you are and what you read"
+    },
+    {
+     "t": "p",
+     "v": "Member accounts are free — you can also create one instantly on the sign-in page. Subscriber requests receive pricing and a sample note by reply."
+    },
+    {
+     "t": "p",
+     "v": "We do not sell or share reader information. Your request goes only to the research desk."
+    },
+    {
+     "t": "label",
+     "v": "NAME"
+    },
+    {
+     "t": "field",
+     "v": "Full name"
+    },
+    {
+     "t": "label",
+     "v": "EMAIL"
+    },
+    {
+     "t": "field",
+     "v": "you@firm.com"
+    },
+    {
+     "t": "label",
+     "v": "FIRM (OPTIONAL)"
+    },
+    {
+     "t": "field",
+     "v": "Fund, family office, or independent"
+    },
+    {
+     "t": "label",
+     "v": "ACCESS REQUESTED"
+    },
+    {
+     "t": "field",
+     "v": "plan"
+    },
+    {
+     "t": "label",
+     "v": "WHAT ARE YOU LOOKING FOR? (OPTIONAL)"
+    },
+    {
+     "t": "field",
+     "v": "Sectors you follow, how you use independent research, anything else useful"
+    },
+    {
+     "t": "button",
+     "v": "SEND REQUEST"
+    }
+   ]
+  },
+  {
+   "name": "Disclaimer",
+   "hash": "#/disclaimer",
+   "blocks": [
+    {
+     "t": "eyebrow",
+     "v": "DISCLAIMER"
+    },
+    {
+     "t": "h2",
+     "v": "Research, not advice"
+    },
+    {
+     "t": "p",
+     "v": "LAST UPDATED SEPTEMBER 2026"
+    },
+    {
+     "t": "p",
+     "v": "Please read this before relying on any writeup. Access to the site is conditioned on acceptance of these terms."
+    },
+    {
+     "t": "h3",
+     "v": "Not investment advice"
+    },
+    {
+     "t": "p",
+     "v": "The content of this website, including all research writeups, models, commentary, and communications (collectively, the \"Content\"), is provided for informational and educational purposes only. Nothing on this site constitutes investment, legal, tax, or accounting advice, or a recommendation to buy, sell, or hold any security or financial instrument. You should consult a qualified professional before making any investment decision."
+    },
+    {
+     "t": "h3",
+     "v": "No offer or solicitation"
+    },
+    {
+     "t": "p",
+     "v": "Nothing here is an offer to sell or a solicitation of an offer to buy any security, fund interest, or advisory service in any jurisdiction where such an offer or solicitation would be unlawful."
+    },
+    {
+     "t": "h3",
+     "v": "Positions and conflicts"
+    },
+    {
+     "t": "p",
+     "v": "Prajit Research and its principals may hold long or short positions in securities discussed, and may trade in those securities at any time without notice, including in a manner inconsistent with the Content. Any such position is disclosed within the relevant writeup at the time of publication."
+    },
+    {
+     "t": "h3",
+     "v": "Accuracy and completeness"
+    },
+    {
+     "t": "p",
+     "v": "The Content is based on sources believed to be reliable, including public filings and company disclosures, but no representation or warranty is made as to its accuracy, completeness, or timeliness. Opinions expressed are current as of the publication date and are subject to change without notice."
+    },
+    {
+     "t": "h3",
+     "v": "Forward-looking statements"
+    },
+    {
+     "t": "p",
+     "v": "The Content contains estimates, projections, and forward-looking statements that involve known and unknown risks and uncertainties. Actual results may differ materially. Past performance is not indicative of future results."
+    },
+    {
+     "t": "h3",
+     "v": "No reliance; limitation of liability"
+    },
+    {
+     "t": "p",
+     "v": "You agree that you use the Content at your own risk and that Prajit Research shall not be liable for any loss or damage, direct or indirect, arising from reliance on the Content. Access to any part of this site is conditioned on acceptance of these terms."
+    },
+    {
+     "t": "h3",
+     "v": "Jurisdiction"
+    },
+    {
+     "t": "p",
+     "v": "The Content is directed at persons in jurisdictions where its distribution is lawful. It is your responsibility to ensure that accessing the Content complies with the laws applicable to you."
+    }
+   ]
+  },
+  {
+   "name": "Copyright and terms of use",
+   "hash": "#/copyright",
+   "blocks": [
+    {
+     "t": "eyebrow",
+     "v": "COPYRIGHT AND TERMS OF USE"
+    },
+    {
+     "t": "h2",
+     "v": "What you may do with what you read"
+    },
+    {
+     "t": "p",
+     "v": "LAST UPDATED SEPTEMBER 2026"
+    },
+    {
+     "t": "p",
+     "v": "© 2026–2026 Prajit Research. All rights reserved."
+    },
+    {
+     "t": "h3",
+     "v": "Ownership"
+    },
+    {
+     "t": "p",
+     "v": "All Content on this site, including text, tables, charts, models, and the selection and arrangement thereof, is the property of Prajit Research and is protected by copyright and other intellectual-property laws."
+    },
+    {
+     "t": "h3",
+     "v": "Permitted use"
+    },
+    {
+     "t": "p",
+     "v": "Guests, members, and subscribers are granted a limited, non-exclusive, non-transferable licence to view the Content for personal, non-commercial use. Subscriber downloads are licensed to the named subscriber only."
+    },
+    {
+     "t": "h3",
+     "v": "Restrictions"
+    },
+    {
+     "t": "p",
+     "v": "You may not reproduce, redistribute, republish, sell, or create derivative works from the Content, in whole or in part, without prior written permission. Sharing account access or forwarding gated Content is a breach of these terms and grounds for termination of access."
+    },
+    {
+     "t": "h3",
+     "v": "Quotation and attribution"
+    },
+    {
+     "t": "p",
+     "v": "Brief quotations for commentary, criticism, or news reporting are permitted with clear attribution to Prajit Research and a link to the original writeup."
+    },
+    {
+     "t": "h3",
+     "v": "Trademarks"
+    },
+    {
+     "t": "p",
+     "v": "\"Prajit Research\" and the associated marks are trademarks of Prajit Research. Third-party company names and marks referenced in the Content belong to their respective owners and are used for identification only."
+    },
+    {
+     "t": "h3",
+     "v": "Requests"
+    },
+    {
+     "t": "p",
+     "v": "Permission requests, takedown notices, and licensing enquiries should be sent to the contact address on the access page."
+    }
+   ]
+  }
+ ],
+ "notes": [
+  {
+   "slug": "kill-conditions",
+   "blocks": [
+    {
+     "t": "a",
+     "v": "← LIBRARY"
+    },
+    {
+     "t": "eyebrow",
+     "v": "FRAMEWORK · METHODOLOGY"
+    },
+    {
+     "t": "h1",
+     "v": "Our kill conditions: how every thesis gets a sell rule before a buy"
+    },
+    {
+     "t": "p",
+     "v": "The one-sentence test each note must pass before publication, and why it matters more than the price target."
+    },
+    {
+     "t": "dt",
+     "v": "PUBLISHED"
+    },
+    {
+     "t": "dd",
+     "v": "Sep 2, 2026"
+    },
+    {
+     "t": "dt",
+     "v": "SECTOR"
+    },
+    {
+     "t": "dd",
+     "v": "Methodology"
+    },
+    {
+     "t": "dt",
+     "v": "TYPE"
+    },
+    {
+     "t": "dd",
+     "v": "Framework"
+    },
+    {
+     "t": "dt",
+     "v": "READ TIME"
+    },
+    {
+     "t": "dd",
+     "v": "6 min"
+    },
+    {
+     "t": "dt",
+     "v": "VERSION"
+    },
+    {
+     "t": "dd",
+     "v": "v2"
+    },
+    {
+     "t": "dt",
+     "v": "ACCESS"
+    },
+    {
+     "t": "span",
+     "v": "FREE"
+    },
+    {
+     "t": "eyebrow",
+     "v": "WRITEUP"
+    },
+    {
+     "t": "p",
+     "v": "Signed in as Demo Subscriber"
+    },
+    {
+     "t": "p",
+     "v": "Aprice target tells you what we hope. A kill condition tells you what we will do. Every writeup we publish carries one sentence — observable, dated where possible, and independent of the share price — that describes the event that would prove the thesis wrong."
+    },
+    {
+     "t": "p",
+     "v": "The discipline sounds obvious. It is rarely practised, because it forces the analyst to argue against the note before it is written. That is exactly the point: the kill condition is the bear case reduced to something we can check each quarter without re-litigating the whole thesis."
+    },
+    {
+     "t": "h3",
+     "v": "What a good kill condition looks like"
+    },
+    {
+     "t": "p",
+     "v": "In practice, a good kill condition is specific to the business model."
+    },
+    {
+     "t": "li",
+     "v": "For a distributor: two consecutive quarters of gross-margin compression while volume grows."
+    },
+    {
+     "t": "li",
+     "v": "For a bank: a deposit beta above the level the model assumed at the top of the cycle."
+    },
+    {
+     "t": "li",
+     "v": "Never: \"the stock falls 20%\"."
+    },
+    {
+     "t": "p",
+     "v": "When a kill condition triggers, two things happen on the same day: the note is updated, and any position is exited. The post-mortem is then published with the same prominence as the initiation. Readers should be able to judge us on our misses as easily as on our hits."
+    },
+    {
+     "t": "a",
+     "v": "Disclaimer"
+    },
+    {
+     "t": "a",
+     "v": "Copyright"
+    }
+   ]
+  },
+  {
+   "slug": "specialty-insurance-post-mortem",
+   "blocks": [
+    {
+     "t": "a",
+     "v": "← LIBRARY"
+    },
+    {
+     "t": "eyebrow",
+     "v": "POST-MORTEM · FINANCIALS"
+    },
+    {
+     "t": "h1",
+     "v": "What we got wrong on specialty insurance in 2025"
+    },
+    {
+     "t": "p",
+     "v": "A pricing-cycle call that was right on direction and wrong on duration — and what it changed in our model."
+    },
+    {
+     "t": "dt",
+     "v": "PUBLISHED"
+    },
+    {
+     "t": "dd",
+     "v": "Aug 19, 2026"
+    },
+    {
+     "t": "dt",
+     "v": "SECTOR"
+    },
+    {
+     "t": "dd",
+     "v": "Financials"
+    },
+    {
+     "t": "dt",
+     "v": "TYPE"
+    },
+    {
+     "t": "dd",
+     "v": "Post-mortem"
+    },
+    {
+     "t": "dt",
+     "v": "READ TIME"
+    },
+    {
+     "t": "dd",
+     "v": "9 min"
+    },
+    {
+     "t": "dt",
+     "v": "VERSION"
+    },
+    {
+     "t": "dd",
+     "v": "v1"
+    },
+    {
+     "t": "dt",
+     "v": "ACCESS"
+    },
+    {
+     "t": "span",
+     "v": "FREE"
+    },
+    {
+     "t": "eyebrow",
+     "v": "WRITEUP"
+    },
+    {
+     "t": "p",
+     "v": "Signed in as Demo Subscriber"
+    },
+    {
+     "t": "p",
+     "v": "We initiated on the specialty lines in early 2025 on the view that hard-market pricing had a longer tail than the market assumed. The direction was right. The duration was not, and the kill condition — a second consecutive quarter of rate decreases in the core lines — triggered in the third quarter."
+    },
+    {
+     "t": "p",
+     "v": "The error was one of extrapolation. Our model held retention flat while pricing softened, which is the one combination the cycle rarely delivers. When capacity returned, both moved at once."
+    },
+    {
+     "t": "p",
+     "v": "The fix was structural rather than cosmetic: the model now links retention to rate change with a lag, and the bear case is required to include a capacity-return scenario for any name whose thesis rests on pricing. It is a more pessimistic model, and a better one."
+    },
+    {
+     "t": "p",
+     "v": "We remain interested in the space at a different point in the cycle. The note stays in the library as published, with this post-mortem attached, because the original reasoning is the only honest record of what we believed and why."
+    },
+    {
+     "t": "a",
+     "v": "Disclaimer"
+    },
+    {
+     "t": "a",
+     "v": "Copyright"
+    }
+   ]
+  },
+  {
+   "slug": "industrial-distribution-compounders",
+   "blocks": [
+    {
+     "t": "a",
+     "v": "← LIBRARY"
+    },
+    {
+     "t": "eyebrow",
+     "v": "DEEP DIVE · INDUSTRIALS"
+    },
+    {
+     "t": "h1",
+     "v": "The quiet compounders in industrial distribution"
+    },
+    {
+     "t": "p",
+     "v": "Why route density, not scale, is the moat — and how to tell which distributors actually have it."
+    },
+    {
+     "t": "dt",
+     "v": "PUBLISHED"
+    },
+    {
+     "t": "dd",
+     "v": "Aug 5, 2026"
+    },
+    {
+     "t": "dt",
+     "v": "SECTOR"
+    },
+    {
+     "t": "dd",
+     "v": "Industrials"
+    },
+    {
+     "t": "dt",
+     "v": "TYPE"
+    },
+    {
+     "t": "dd",
+     "v": "Deep dive"
+    },
+    {
+     "t": "dt",
+     "v": "READ TIME"
+    },
+    {
+     "t": "dd",
+     "v": "22 min"
+    },
+    {
+     "t": "dt",
+     "v": "VERSION"
+    },
+    {
+     "t": "dd",
+     "v": "v1"
+    },
+    {
+     "t": "dt",
+     "v": "ACCESS"
+    },
+    {
+     "t": "span",
+     "v": "MEMBER"
+    },
+    {
+     "t": "eyebrow",
+     "v": "WRITEUP"
+    },
+    {
+     "t": "p",
+     "v": "Signed in as Demo Subscriber"
+    },
+    {
+     "t": "p",
+     "v": "Industrial distribution is usually described as a scale business. It is not, or at least not primarily. The economics are set by route density: revenue per delivery stop, stops per route, and the gross margin those stops carry. A large distributor with thin density earns less on capital than a regional one with dense routes."
+    },
+    {
+     "t": "p",
+     "v": "This matters because scale is visible in the income statement and density is not. To find it, we rebuild the branch footprint from filings and count stops per route where the company discloses enough to do so."
+    },
+    {
+     "t": "h3",
+     "v": "The three traits"
+    },
+    {
+     "t": "p",
+     "v": "The names that pass that screen share three traits:"
+    },
+    {
+     "t": "li",
+     "v": "Private-label penetration above a threshold."
+    },
+    {
+     "t": "li",
+     "v": "A branch-manager incentive tied to local return on assets rather than revenue."
+    },
+    {
+     "t": "li",
+     "v": "A working-capital cycle that shortens as the branch matures."
+    },
+    {
+     "t": "p",
+     "v": "Each is disclosed somewhere; none is headlined."
+    },
+    {
+     "t": "p",
+     "v": "Valuation follows from the density model rather than from a peer multiple. We show the base, bear, and bull cases for two illustrative footprints, and the kill condition for each: a sustained decline in gross profit per stop while the branch count grows."
+    },
+    {
+     "t": "eyebrow",
+     "v": "ATTACHED DOCUMENT"
+    },
+    {
+     "t": "p",
+     "v": "industrial-distribution-compounders.pdf"
+    },
+    {
+     "t": "button",
+     "v": "DOWNLOAD"
+    },
+    {
+     "t": "a",
+     "v": "Disclaimer"
+    },
+    {
+     "t": "a",
+     "v": "Copyright"
+    }
+   ]
+  },
+  {
+   "slug": "regional-banks-deposit-franchises",
+   "blocks": [
+    {
+     "t": "a",
+     "v": "← LIBRARY"
+    },
+    {
+     "t": "eyebrow",
+     "v": "INITIATION · FINANCIALS"
+    },
+    {
+     "t": "h1",
+     "v": "Regional banks after the rate cycle: deposit franchises that still earn their keep"
+    },
+    {
+     "t": "p",
+     "v": "Separating the banks whose low-cost deposits survived the cycle from those that merely reported them."
+    },
+    {
+     "t": "dt",
+     "v": "PUBLISHED"
+    },
+    {
+     "t": "dd",
+     "v": "Jul 22, 2026"
+    },
+    {
+     "t": "dt",
+     "v": "SECTOR"
+    },
+    {
+     "t": "dd",
+     "v": "Financials"
+    },
+    {
+     "t": "dt",
+     "v": "TYPE"
+    },
+    {
+     "t": "dd",
+     "v": "Initiation"
+    },
+    {
+     "t": "dt",
+     "v": "READ TIME"
+    },
+    {
+     "t": "dd",
+     "v": "31 min"
+    },
+    {
+     "t": "dt",
+     "v": "VERSION"
+    },
+    {
+     "t": "dd",
+     "v": "v3"
+    },
+    {
+     "t": "dt",
+     "v": "ACCESS"
+    },
+    {
+     "t": "span",
+     "v": "SUBSCRIBER"
+    },
+    {
+     "t": "eyebrow",
+     "v": "WRITEUP"
+    },
+    {
+     "t": "p",
+     "v": "Signed in as Demo Subscriber"
+    },
+    {
+     "t": "p",
+     "v": "Every regional bank claims a low-cost deposit franchise. The cycle just ended was the first real test in fifteen years, and the results are now in the call reports. Our initiation ranks the franchises by the deposit beta they actually realised, not the one they guided to."
+    },
+    {
+     "t": "p",
+     "v": "The gap between guided and realised beta is the single most useful number in the sector today, because it reveals how much of the \"core\" deposit base was rate-insensitive in fact rather than in management's description."
+    },
+    {
+     "t": "p",
+     "v": "From there the note rebuilds net interest income on a reset funding cost, stresses the securities book at two rate paths, and sets a kill condition per name tied to non-interest-bearing deposit mix rather than to earnings."
+    },
+    {
+     "t": "p",
+     "v": "The full initiation includes the model, the ranking table, and the disclosure of positions held."
+    },
+    {
+     "t": "eyebrow",
+     "v": "ATTACHED DOCUMENT"
+    },
+    {
+     "t": "p",
+     "v": "regional-banks-deposit-franchises.pdf"
+    },
+    {
+     "t": "button",
+     "v": "DOWNLOAD"
+    },
+    {
+     "t": "a",
+     "v": "Disclaimer"
+    },
+    {
+     "t": "a",
+     "v": "Copyright"
+    }
+   ]
+  },
+  {
+   "slug": "hospital-outsourcing-margin-recovery",
+   "blocks": [
+    {
+     "t": "a",
+     "v": "← LIBRARY"
+    },
+    {
+     "t": "eyebrow",
+     "v": "INITIATION · HEALTHCARE"
+    },
+    {
+     "t": "h1",
+     "v": "Hospital outsourcing: margin recovery is a volume story"
+    },
+    {
+     "t": "p",
+     "v": "Labour cost gets the headlines; contract density and case mix decide the margin."
+    },
+    {
+     "t": "dt",
+     "v": "PUBLISHED"
+    },
+    {
+     "t": "dd",
+     "v": "Jul 1, 2026"
+    },
+    {
+     "t": "dt",
+     "v": "SECTOR"
+    },
+    {
+     "t": "dd",
+     "v": "Healthcare"
+    },
+    {
+     "t": "dt",
+     "v": "TYPE"
+    },
+    {
+     "t": "dd",
+     "v": "Initiation"
+    },
+    {
+     "t": "dt",
+     "v": "READ TIME"
+    },
+    {
+     "t": "dd",
+     "v": "27 min"
+    },
+    {
+     "t": "dt",
+     "v": "VERSION"
+    },
+    {
+     "t": "dd",
+     "v": "v1"
+    },
+    {
+     "t": "dt",
+     "v": "ACCESS"
+    },
+    {
+     "t": "span",
+     "v": "MEMBER"
+    },
+    {
+     "t": "eyebrow",
+     "v": "WRITEUP"
+    },
+    {
+     "t": "p",
+     "v": "Signed in as Demo Subscriber"
+    },
+    {
+     "t": "p",
+     "v": "The consensus view on hospital outsourcing is that margins recover when contract labour normalises. That is half right. Labour is the largest cost, but the margin is decided by contract density — how many service lines the outsourcer runs inside a single facility — and by case mix."
+    },
+    {
+     "t": "p",
+     "v": "Density is what turns a fixed on-site cost into a variable one. A single-line contract carries the full overhead of a site; a third line at the same site carries almost none."
+    },
+    {
+     "t": "p",
+     "v": "The note sets out how to read density from segment disclosures, why the incumbents' reported \"same-site growth\" understates it, and what a normalised margin looks like once density is modelled explicitly."
+    },
+    {
+     "t": "p",
+     "v": "Kill condition: two consecutive quarters in which new-contract wins are majority single-line, which would indicate the density thesis is not being executed."
+    },
+    {
+     "t": "a",
+     "v": "Disclaimer"
+    },
+    {
+     "t": "a",
+     "v": "Copyright"
+    }
+   ]
+  },
+  {
+   "slug": "memory-pricing-discipline",
+   "blocks": [
+    {
+     "t": "a",
+     "v": "← LIBRARY"
+    },
+    {
+     "t": "eyebrow",
+     "v": "UPDATE · SEMICONDUCTORS"
+    },
+    {
+     "t": "h1",
+     "v": "Memory pricing and the discipline nobody expects to last"
+    },
+    {
+     "t": "p",
+     "v": "An update to the initiation: the supply response is slower than our bear case assumed, and the kill condition has not triggered."
+    },
+    {
+     "t": "dt",
+     "v": "PUBLISHED"
+    },
+    {
+     "t": "dd",
+     "v": "Jun 12, 2026"
+    },
+    {
+     "t": "dt",
+     "v": "SECTOR"
+    },
+    {
+     "t": "dd",
+     "v": "Semiconductors"
+    },
+    {
+     "t": "dt",
+     "v": "TYPE"
+    },
+    {
+     "t": "dd",
+     "v": "Update"
+    },
+    {
+     "t": "dt",
+     "v": "READ TIME"
+    },
+    {
+     "t": "dd",
+     "v": "11 min"
+    },
+    {
+     "t": "dt",
+     "v": "VERSION"
+    },
+    {
+     "t": "dd",
+     "v": "v2"
+    },
+    {
+     "t": "dt",
+     "v": "ACCESS"
+    },
+    {
+     "t": "span",
+     "v": "SUBSCRIBER"
+    },
+    {
+     "t": "eyebrow",
+     "v": "WRITEUP"
+    },
+    {
+     "t": "p",
+     "v": "Signed in as Demo Subscriber"
+    },
+    {
+     "t": "p",
+     "v": "This update revisits the memory initiation against two quarters of data. The central question was whether capital discipline would hold once pricing recovered; the market assumed it would not, and our bear case agreed."
+    },
+    {
+     "t": "p",
+     "v": "So far the supply response has been slower than either expected. Capacity announcements have lagged pricing by more than a full cycle's worth of historical precedent."
+    },
+    {
+     "t": "p",
+     "v": "We do not raise the thesis on the strength of two quarters. We do note that the kill condition — a specific capacity-addition threshold — has not triggered, and we update the scenario weights accordingly."
+    },
+    {
+     "t": "p",
+     "v": "Positions held are disclosed in full below. The model is updated in the subscriber download."
+    },
+    {
+     "t": "a",
+     "v": "Disclaimer"
+    },
+    {
+     "t": "a",
+     "v": "Copyright"
+    }
+   ]
+  }
+ ],
+ "admin": [
+  {
+   "name": "Admin — Overview",
+   "hash": "#/admin",
+   "blocks": [
+    {
+     "t": "eyebrow",
+     "v": "ADMIN"
+    },
+    {
+     "t": "h2",
+     "v": "Research desk"
+    },
+    {
+     "t": "a",
+     "v": "OVERVIEW"
+    },
+    {
+     "t": "a",
+     "v": "WRITEUPS"
+    },
+    {
+     "t": "a",
+     "v": "MEMBERS"
+    },
+    {
+     "t": "a",
+     "v": "REQUESTS"
+    },
+    {
+     "t": "b",
+     "v": "1,267"
+    },
+    {
+     "t": "span",
+     "v": "VIEWS, ALL TIME"
+    },
+    {
+     "t": "b",
+     "v": "206"
+    },
+    {
+     "t": "span",
+     "v": "VIEWS, LAST 7 DAYS"
+    },
+    {
+     "t": "b",
+     "v": "5"
+    },
+    {
+     "t": "span",
+     "v": "ACCOUNTS"
+    },
+    {
+     "t": "b",
+     "v": "3"
+    },
+    {
+     "t": "span",
+     "v": "SUBSCRIBERS"
+    },
+    {
+     "t": "b",
+     "v": "1"
+    },
+    {
+     "t": "span",
+     "v": "OPEN REQUESTS"
+    },
+    {
+     "t": "h3",
+     "v": "Views by writeup"
+    },
+    {
+     "t": "a",
+     "v": "MANAGE WRITEUPS →"
+    },
+    {
+     "t": "th",
+     "v": "WRITEUP"
+    },
+    {
+     "t": "th",
+     "v": "ALL TIME"
+    },
+    {
+     "t": "th",
+     "v": "7 DAYS"
+    },
+    {
+     "t": "th",
+     "v": "SIGNED-IN READERS"
+    },
+    {
+     "t": "td",
+     "v": "412"
+    },
+    {
+     "t": "td",
+     "v": "78"
+    },
+    {
+     "t": "td",
+     "v": "17"
+    },
+    {
+     "t": "td",
+     "v": "297"
+    },
+    {
+     "t": "td",
+     "v": "45"
+    },
+    {
+     "t": "td",
+     "v": "17"
+    },
+    {
+     "t": "td",
+     "v": "183"
+    },
+    {
+     "t": "td",
+     "v": "24"
+    },
+    {
+     "t": "td",
+     "v": "17"
+    },
+    {
+     "t": "td",
+     "v": "158"
+    },
+    {
+     "t": "td",
+     "v": "26"
+    },
+    {
+     "t": "td",
+     "v": "17"
+    },
+    {
+     "t": "td",
+     "v": "121"
+    },
+    {
+     "t": "td",
+     "v": "15"
+    },
+    {
+     "t": "td",
+     "v": "17"
+    },
+    {
+     "t": "td",
+     "v": "96"
+    },
+    {
+     "t": "td",
+     "v": "18"
+    },
+    {
+     "t": "td",
+     "v": "17"
+    },
+    {
+     "t": "td",
+     "v": "0"
+    },
+    {
+     "t": "td",
+     "v": "0"
+    },
+    {
+     "t": "td",
+     "v": "0"
+    },
+    {
+     "t": "p",
+     "v": "Views count every open of a published writeup, signed in or not. Signed-in readers are unique accounts."
+    }
+   ]
+  },
+  {
+   "name": "Admin — Writeups",
+   "hash": "#/admin/writeups",
+   "blocks": [
+    {
+     "t": "eyebrow",
+     "v": "ADMIN"
+    },
+    {
+     "t": "h2",
+     "v": "Research desk"
+    },
+    {
+     "t": "a",
+     "v": "OVERVIEW"
+    },
+    {
+     "t": "a",
+     "v": "WRITEUPS"
+    },
+    {
+     "t": "a",
+     "v": "MEMBERS"
+    },
+    {
+     "t": "a",
+     "v": "REQUESTS"
+    },
+    {
+     "t": "h3",
+     "v": "Writeups"
+    },
+    {
+     "t": "a",
+     "v": "NEW WRITEUP"
+    },
+    {
+     "t": "th",
+     "v": "TITLE"
+    },
+    {
+     "t": "th",
+     "v": "STATUS"
+    },
+    {
+     "t": "th",
+     "v": "ACCESS"
+    },
+    {
+     "t": "th",
+     "v": "PUBLISHED"
+    },
+    {
+     "t": "th",
+     "v": "VIEWS"
+    },
+    {
+     "t": "span",
+     "v": "DRAFT"
+    },
+    {
+     "t": "span",
+     "v": "MEMBER"
+    },
+    {
+     "t": "td",
+     "v": "—"
+    },
+    {
+     "t": "td",
+     "v": "0"
+    },
+    {
+     "t": "a",
+     "v": "EDIT"
+    },
+    {
+     "t": "button",
+     "v": "PUBLISH"
+    },
+    {
+     "t": "button",
+     "v": "DELETE"
+    },
+    {
+     "t": "span",
+     "v": "PUBLISHED"
+    },
+    {
+     "t": "span",
+     "v": "FREE"
+    },
+    {
+     "t": "td",
+     "v": "Sep 2, 2026"
+    },
+    {
+     "t": "td",
+     "v": "412"
+    },
+    {
+     "t": "a",
+     "v": "EDIT"
+    },
+    {
+     "t": "button",
+     "v": "UNPUBLISH"
+    },
+    {
+     "t": "button",
+     "v": "DELETE"
+    },
+    {
+     "t": "span",
+     "v": "PUBLISHED"
+    },
+    {
+     "t": "span",
+     "v": "FREE"
+    },
+    {
+     "t": "td",
+     "v": "Aug 19, 2026"
+    },
+    {
+     "t": "td",
+     "v": "297"
+    },
+    {
+     "t": "a",
+     "v": "EDIT"
+    },
+    {
+     "t": "button",
+     "v": "UNPUBLISH"
+    },
+    {
+     "t": "button",
+     "v": "DELETE"
+    },
+    {
+     "t": "span",
+     "v": "PUBLISHED"
+    },
+    {
+     "t": "span",
+     "v": "MEMBER"
+    },
+    {
+     "t": "td",
+     "v": "Aug 5, 2026"
+    },
+    {
+     "t": "td",
+     "v": "183"
+    },
+    {
+     "t": "a",
+     "v": "EDIT"
+    },
+    {
+     "t": "button",
+     "v": "UNPUBLISH"
+    },
+    {
+     "t": "button",
+     "v": "DELETE"
+    },
+    {
+     "t": "span",
+     "v": "PUBLISHED"
+    },
+    {
+     "t": "span",
+     "v": "SUBSCRIBER"
+    },
+    {
+     "t": "td",
+     "v": "Jul 22, 2026"
+    },
+    {
+     "t": "td",
+     "v": "158"
+    },
+    {
+     "t": "a",
+     "v": "EDIT"
+    },
+    {
+     "t": "button",
+     "v": "UNPUBLISH"
+    },
+    {
+     "t": "button",
+     "v": "DELETE"
+    },
+    {
+     "t": "span",
+     "v": "PUBLISHED"
+    },
+    {
+     "t": "span",
+     "v": "MEMBER"
+    },
+    {
+     "t": "td",
+     "v": "Jul 1, 2026"
+    },
+    {
+     "t": "td",
+     "v": "121"
+    },
+    {
+     "t": "a",
+     "v": "EDIT"
+    },
+    {
+     "t": "button",
+     "v": "UNPUBLISH"
+    },
+    {
+     "t": "button",
+     "v": "DELETE"
+    },
+    {
+     "t": "span",
+     "v": "PUBLISHED"
+    },
+    {
+     "t": "span",
+     "v": "SUBSCRIBER"
+    },
+    {
+     "t": "td",
+     "v": "Jun 12, 2026"
+    },
+    {
+     "t": "td",
+     "v": "96"
+    },
+    {
+     "t": "a",
+     "v": "EDIT"
+    },
+    {
+     "t": "button",
+     "v": "UNPUBLISH"
+    },
+    {
+     "t": "button",
+     "v": "DELETE"
+    }
+   ]
+  },
+  {
+   "name": "Admin — Members",
+   "hash": "#/admin/members",
+   "blocks": [
+    {
+     "t": "eyebrow",
+     "v": "ADMIN"
+    },
+    {
+     "t": "h2",
+     "v": "Research desk"
+    },
+    {
+     "t": "a",
+     "v": "OVERVIEW"
+    },
+    {
+     "t": "a",
+     "v": "WRITEUPS"
+    },
+    {
+     "t": "a",
+     "v": "MEMBERS"
+    },
+    {
+     "t": "a",
+     "v": "REQUESTS"
+    },
+    {
+     "t": "h3",
+     "v": "Members"
+    },
+    {
+     "t": "span",
+     "v": "5 accounts · 3 subscribers"
+    },
+    {
+     "t": "th",
+     "v": "NAME"
+    },
+    {
+     "t": "th",
+     "v": "EMAIL"
+    },
+    {
+     "t": "th",
+     "v": "FIRM"
+    },
+    {
+     "t": "th",
+     "v": "ACCESS"
+    },
+    {
+     "t": "th",
+     "v": "JOINED"
+    },
+    {
+     "t": "td",
+     "v": "reader5@example.com"
+    },
+    {
+     "t": "td",
+     "v": "—"
+    },
+    {
+     "t": "field",
+     "v": ""
+    },
+    {
+     "t": "td",
+     "v": "Aug 28, 2026"
+    },
+    {
+     "t": "td",
+     "v": "reader4@example.com"
+    },
+    {
+     "t": "td",
+     "v": "Family office"
+    },
+    {
+     "t": "field",
+     "v": ""
+    },
+    {
+     "t": "td",
+     "v": "Aug 20, 2026"
+    },
+    {
+     "t": "td",
+     "v": "member@example.com"
+    },
+    {
+     "t": "td",
+     "v": "Independent"
+    },
+    {
+     "t": "field",
+     "v": ""
+    },
+    {
+     "t": "td",
+     "v": "Aug 12, 2026"
+    },
+    {
+     "t": "td",
+     "v": "subscriber@example.com"
+    },
+    {
+     "t": "td",
+     "v": "Example Capital"
+    },
+    {
+     "t": "field",
+     "v": ""
+    },
+    {
+     "t": "td",
+     "v": "Jul 30, 2026"
+    },
+    {
+     "t": "span",
+     "v": "ADMIN"
+    },
+    {
+     "t": "td",
+     "v": "admin@example.com"
+    },
+    {
+     "t": "td",
+     "v": "Prajit Research"
+    },
+    {
+     "t": "field",
+     "v": ""
+    },
+    {
+     "t": "td",
+     "v": "Jun 1, 2026"
+    },
+    {
+     "t": "p",
+     "v": "Changing a reader's access takes effect on their next page load. Admins are set in the database, not here."
+    }
+   ]
+  },
+  {
+   "name": "Admin — Requests",
+   "hash": "#/admin/requests",
+   "blocks": [
+    {
+     "t": "eyebrow",
+     "v": "ADMIN"
+    },
+    {
+     "t": "h2",
+     "v": "Research desk"
+    },
+    {
+     "t": "a",
+     "v": "OVERVIEW"
+    },
+    {
+     "t": "a",
+     "v": "WRITEUPS"
+    },
+    {
+     "t": "a",
+     "v": "MEMBERS"
+    },
+    {
+     "t": "a",
+     "v": "REQUESTS"
+    },
+    {
+     "t": "h3",
+     "v": "Access requests"
+    },
+    {
+     "t": "span",
+     "v": "1 open"
+    },
+    {
+     "t": "th",
+     "v": "RECEIVED"
+    },
+    {
+     "t": "th",
+     "v": "WHO"
+    },
+    {
+     "t": "th",
+     "v": "WANTS"
+    },
+    {
+     "t": "th",
+     "v": "NOTE"
+    },
+    {
+     "t": "th",
+     "v": "STATUS"
+    },
+    {
+     "t": "td",
+     "v": "Sep 12, 2026, 3:20 PM"
+    },
+    {
+     "t": "span",
+     "v": "SUBSCRIBER"
+    },
+    {
+     "t": "td",
+     "v": "Financials coverage, quarterly call."
+    },
+    {
+     "t": "span",
+     "v": "NEW"
+    },
+    {
+     "t": "button",
+     "v": "APPROVE"
+    },
+    {
+     "t": "button",
+     "v": "DECLINE"
+    },
+    {
+     "t": "td",
+     "v": "Sep 10, 2026, 11:05 AM"
+    },
+    {
+     "t": "span",
+     "v": "MEMBER"
+    },
+    {
+     "t": "td",
+     "v": "—"
+    },
+    {
+     "t": "span",
+     "v": "APPROVED"
+    },
+    {
+     "t": "p",
+     "v": "Approving a subscriber request upgrades the account with that email if it exists, and upgrades it automatically when that reader first signs in."
+    }
+   ]
+  },
+  {
+   "name": "Admin — New/Edit writeup form",
+   "hash": "#/admin/edit/new",
+   "blocks": [
+    {
+     "t": "eyebrow",
+     "v": "ADMIN"
+    },
+    {
+     "t": "h2",
+     "v": "Research desk"
+    },
+    {
+     "t": "a",
+     "v": "OVERVIEW"
+    },
+    {
+     "t": "a",
+     "v": "WRITEUPS"
+    },
+    {
+     "t": "a",
+     "v": "MEMBERS"
+    },
+    {
+     "t": "a",
+     "v": "REQUESTS"
+    },
+    {
+     "t": "h3",
+     "v": "New writeup"
+    },
+    {
+     "t": "a",
+     "v": "← ALL WRITEUPS"
+    },
+    {
+     "t": "label",
+     "v": "TITLE"
+    },
+    {
+     "t": "field",
+     "v": "title"
+    },
+    {
+     "t": "label",
+     "v": "SLUG (WEB ADDRESS)"
+    },
+    {
+     "t": "field",
+     "v": "auto from title"
+    },
+    {
+     "t": "span",
+     "v": "Letters, numbers, dashes. Changing it breaks old links."
+    },
+    {
+     "t": "label",
+     "v": "PUBLISHED DATE"
+    },
+    {
+     "t": "field",
+     "v": "published_at"
+    },
+    {
+     "t": "label",
+     "v": "SUMMARY (SHOWN TO EVERYONE)"
+    },
+    {
+     "t": "field",
+     "v": "summary"
+    },
+    {
+     "t": "label",
+     "v": "SECTOR"
+    },
+    {
+     "t": "field",
+     "v": "Financials"
+    },
+    {
+     "t": "label",
+     "v": "TYPE"
+    },
+    {
+     "t": "field",
+     "v": "type"
+    },
+    {
+     "t": "label",
+     "v": "WHO CAN READ THE FULL NOTE"
+    },
+    {
+     "t": "field",
+     "v": "access"
+    },
+    {
+     "t": "label",
+     "v": "BODY"
+    },
+    {
+     "t": "field",
+     "v": "Paragraphs separated by a blank line. Start a line with ## for a heading, - for a bullet."
+    },
+    {
+     "t": "span",
+     "v": "Only readers with the access level above ever receive this text — it is never sent to guests."
+    },
+    {
+     "t": "label",
+     "v": "ATTACHED DOCUMENT (PDF OR SPREADSHEET, OPTIONAL)"
+    },
+    {
+     "t": "field",
+     "v": "file"
+    },
+    {
+     "t": "span",
+     "v": "Stored privately; only entitled readers can download it."
+    },
+    {
+     "t": "label",
+     "v": "STATUS"
+    },
+    {
+     "t": "field",
+     "v": "status"
+    },
+    {
+     "t": "button",
+     "v": "SAVE"
+    }
+   ]
+  }
+ ],
+ "gateGuest": [
+  {
+   "t": "a",
+   "v": "← LIBRARY"
+  },
+  {
+   "t": "eyebrow",
+   "v": "DEEP DIVE · INDUSTRIALS"
+  },
+  {
+   "t": "h1",
+   "v": "The quiet compounders in industrial distribution"
+  },
+  {
+   "t": "p",
+   "v": "Why route density, not scale, is the moat — and how to tell which distributors actually have it."
+  },
+  {
+   "t": "dt",
+   "v": "PUBLISHED"
+  },
+  {
+   "t": "dd",
+   "v": "Aug 5, 2026"
+  },
+  {
+   "t": "dt",
+   "v": "SECTOR"
+  },
+  {
+   "t": "dd",
+   "v": "Industrials"
+  },
+  {
+   "t": "dt",
+   "v": "TYPE"
+  },
+  {
+   "t": "dd",
+   "v": "Deep dive"
+  },
+  {
+   "t": "dt",
+   "v": "READ TIME"
+  },
+  {
+   "t": "dd",
+   "v": "22 min"
+  },
+  {
+   "t": "dt",
+   "v": "VERSION"
+  },
+  {
+   "t": "dd",
+   "v": "v1"
+  },
+  {
+   "t": "dt",
+   "v": "ACCESS"
+  },
+  {
+   "t": "span",
+   "v": "MEMBER"
+  },
+  {
+   "t": "eyebrow",
+   "v": "WRITEUP"
+  },
+  {
+   "t": "p",
+   "v": "Reading as a guest"
+  },
+  {
+   "t": "p",
+   "v": "Why route density, not scale, is the moat — and how to tell which distributors actually have it."
+  },
+  {
+   "t": "eyebrow",
+   "v": "MEMBER ACCESS"
+  },
+  {
+   "t": "h3",
+   "v": "The rest of this writeup is for members."
+  },
+  {
+   "t": "p",
+   "v": "Member accounts are free. Sign in with your email and the full note opens immediately."
+  },
+  {
+   "t": "a",
+   "v": "SIGN IN OR CREATE AN ACCOUNT"
+  },
+  {
+   "t": "a",
+   "v": "Disclaimer"
+  },
+  {
+   "t": "a",
+   "v": "Copyright"
+  }
+ ],
+ "account": [
+  {
+   "t": "eyebrow",
+   "v": "ACCOUNT"
+  },
+  {
+   "t": "h2",
+   "v": "Demo Subscriber"
+  },
+  {
+   "t": "dt",
+   "v": "EMAIL"
+  },
+  {
+   "t": "dd",
+   "v": "subscriber@example.com"
+  },
+  {
+   "t": "dt",
+   "v": "ACCESS LEVEL"
+  },
+  {
+   "t": "span",
+   "v": "SUBSCRIBER"
+  },
+  {
+   "t": "dt",
+   "v": "MEMBER SINCE"
+  },
+  {
+   "t": "dd",
+   "v": "Jul 30, 2026"
+  },
+  {
+   "t": "label",
+   "v": "NAME"
+  },
+  {
+   "t": "field",
+   "v": "full_name"
+  },
+  {
+   "t": "label",
+   "v": "FIRM"
+  },
+  {
+   "t": "field",
+   "v": "firm"
+  },
+  {
+   "t": "button",
+   "v": "SAVE"
+  },
+  {
+   "t": "button",
+   "v": "SIGN OUT"
+  }
+ ],
+ "nav": [
+  "Research",
+  "Philosophy",
+  "Process",
+  "About",
+  "Admin",
+  "Sign in",
+  "Request access"
+ ],
+ "footer": {
+  "links": [
+   "Research",
+   "Philosophy",
+   "Process",
+   "About",
+   "Request access",
+   "Sign in",
+   "Disclaimer",
+   "Copyright"
+  ],
+  "note": "Prajit Research publishes independent equity research for informational purposes only. Nothing on this site is investment, legal, or tax advice, or an offer or solicitation to buy or sell any security.",
+  "copy": "© 2026–2026 Prajit Research"
+ }
+}

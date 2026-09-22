@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Prajit Research — independent equity research: initiations, updates, and post-mortems built from primary sources.">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Prajit Research">
+<meta property="og:description" content="Independent equity research. Patient research for impatient markets.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://prajitresearch.com/">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Prajit Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+
+<div class="wrap">
+  <header class="site-head">
+    <a class="brand" href="#/" aria-label="Prajit Research home"><span>Prajit</span><span>Research</span></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Primary">
+      <a href="#/research" data-nav="research">Research</a>
+      <a href="#/home/philosophy" data-nav="philosophy">Philosophy</a>
+      <a href="#/home/process" data-nav="process">Process</a>
+      <a href="#/home/about" data-nav="about">About</a>
+      <a href="#/admin" data-nav="admin" class="admin-link" id="navAdmin" hidden>Admin</a>
+      <a href="#/signin" data-nav="signin" id="navAuth">Sign in</a>
+      <a class="btn" href="#/access" data-nav="access">Request access</a>
+    </nav>
+  </header>
+  <div id="demoBar" hidden></div>
+  <main id="app" aria-live="polite"></main>
+  <footer class="site-foot">
+    <div>
+      <div class="foot-links">
+        <a href="#/research">Research</a>
+        <a href="#/home/philosophy">Philosophy</a>
+        <a href="#/home/process">Process</a>
+        <a href="#/home/about">About</a>
+        <a href="#/access">Request access</a>
+        <a href="#/signin">Sign in</a>
+        <a href="#/disclaimer">Disclaimer</a>
+        <a href="#/copyright">Copyright</a>
+      </div>
+      <p class="foot-note">Prajit Research publishes independent equity research for informational purposes only. Nothing on this site is investment, legal, or tax advice, or an offer or solicitation to buy or sell any security.</p>
+    </div>
+    <div class="copy" id="copyLine"></div>
+  </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
