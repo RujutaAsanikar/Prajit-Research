@@ -56,7 +56,8 @@ check("guest reads free note in full", (await text(".prose")).includes("What a g
 await page.click('[data-persona="member"]'); await page.waitForTimeout(300);
 await go("#/note/industrial-distribution-compounders");
 check("member reads member note", (await text(".prose")).includes("route density"));
-check("member sees download for attached doc", await page.locator("#dlBtn").count() === 1);
+await go("#/note/gmm-pfaudler-transformation-thesis");
+check("member still gated on the real subscriber writeup", await page.locator(".gate").count() === 1);
 await go("#/note/regional-banks-deposit-franchises");
 check("member is gated on subscriber note", await page.locator(".gate").count() === 1 && (await text(".gate .btn")).toLowerCase().includes("request subscriber"));
 check("nav shows Account when signed in", (await text("#navAuth")) === "Account");
@@ -65,6 +66,8 @@ check("nav shows Account when signed in", (await text("#navAuth")) === "Account"
 await page.click('[data-persona="subscriber"]'); await page.waitForTimeout(300);
 await go("#/note/regional-banks-deposit-franchises");
 check("subscriber reads subscriber note", (await text(".prose")).includes("deposit beta"));
+await go("#/note/gmm-pfaudler-transformation-thesis");
+check("subscriber sees the protected PDF viewer for the real writeup", await page.locator("#pdfViewer").count() === 1);
 await go("#/admin");
 check("subscriber cannot open admin", (await text("#app h2")).includes("Sign in with an admin account"));
 
@@ -82,6 +85,7 @@ await go("#/signup");
 await page.fill("#su-first", "New"); await page.fill("#su-last", "Reader");
 await page.fill("#su-email", "new@example.org");
 await page.fill("#su-pass", DEMO_PASSWORD); await page.fill("#su-pass2", DEMO_PASSWORD);
+await page.check("#su-terms");
 await page.click("#signupSubmit"); await page.waitForTimeout(400);
 check("signup lands on account page", (await text("#app h2")).includes("New Reader"));
 await page.click("#signoutBtn"); await page.waitForTimeout(300);

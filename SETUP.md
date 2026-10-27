@@ -63,8 +63,6 @@ Nothing to do here. If you ever need to double-check it's running: repository �
 3. **Admin → Writeups**: there is one example draft. Edit or delete it, then add real writeups. For each: title, summary (everyone sees this), body (only entitled readers see this), sector, type, **who can read it** (Free / Member / Subscriber), optional PDF, and **Status = Published** when ready.
 4. Abhijit signs up the same way with prajitresearch@gmail.com and is also admin.
 
-Readers can still sign in without a password too, via "email me a one-time link" on the sign-in page — that path never creates a new account by itself, only existing ones use it.
-
 ## Step 6 — Before real readers arrive
 
 - **Email delivery — now a hard requirement, not optional.** Supabase's built-in email is for testing only — a few messages per hour. Sign-up confirmation emails and password-reset emails will hit that limit almost immediately once real readers show up. Sign up for a free sender (Resend or Brevo), then Supabase → **Authentication → SMTP Settings** → enable custom SMTP and paste the details they give you. About ten minutes.

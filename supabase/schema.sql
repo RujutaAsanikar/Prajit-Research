@@ -372,3 +372,39 @@ $$;
 drop trigger if exists access_requests_rate_limit on public.access_requests;
 create trigger access_requests_rate_limit before insert on public.access_requests
   for each row execute procedure public.guard_request_rate();
+
+-- ---------------------------------------------------------------------
+-- 12. Terms-agreement timestamp (signup now requires a Disclaimer/Copyright/
+--     Terms checkbox) and a kill-condition status per writeup.
+-- ---------------------------------------------------------------------
+alter table public.profiles add column if not exists terms_accepted_at timestamptz;
+alter table public.notes    add column if not exists kill_triggered_at date;
+
+create or replace function public.handle_new_user() returns trigger
+language plpgsql security definer set search_path = public as $$
+declare
+  v_tier text := 'member';
+  v_first text := coalesce(new.raw_user_meta_data ->> 'first_name', '');
+  v_last  text := coalesce(new.raw_user_meta_data ->> 'last_name', '');
+  v_legacy_full text := coalesce(new.raw_user_meta_data ->> 'full_name', '');
+begin
+  if v_first = '' and v_last = '' and v_legacy_full <> '' then
+    v_first := split_part(v_legacy_full, ' ', 1);
+    v_last := trim(substring(v_legacy_full from length(v_first) + 1));
+  end if;
+  if exists (select 1 from public.access_requests r
+             where lower(r.email) = lower(new.email) and r.status = 'approved' and r.plan = 'subscriber') then
+    v_tier := 'subscriber';
+  end if;
+  insert into public.profiles (id, email, first_name, last_name, firm, tier, is_admin, terms_accepted_at)
+  values (
+    new.id, new.email, v_first, v_last,
+    coalesce(new.raw_user_meta_data ->> 'firm', ''),
+    v_tier,
+    exists (select 1 from public.admin_emails a where lower(a.email) = lower(new.email)),
+    now()
+  )
+  on conflict (id) do nothing;
+  return new;
+end;
+$$;

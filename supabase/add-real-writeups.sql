@@ -9,7 +9,7 @@
 
 with wu_gmm_pfaudler_transformation_thesis as (
   insert into public.notes (slug, title, summary, sector, type, access, read_time, status, published_at, version)
-  values ($wu$gmm-pfaudler-transformation-thesis$wu$, $wu$GMM Pfaudler: from engineering company to global process-technology platform$wu$, $wu$The acquisition phase is over. The thesis now turns on whether four newly formed global divisions can convert scale into EBITDA margin and EBIT-to-PAT conversion.$wu$, $wu$Industrials$wu$, $wu$Initiation$wu$, $wu$subscriber$wu$, $wu$6 min$wu$, 'published', current_date, 1)
+  values ($wu$gmm-pfaudler-transformation-thesis$wu$, $wu$GMM Pfaudler: from engineering company to global process-technology platform$wu$, $wu$The acquisition phase is over. The thesis now turns on whether four newly formed global divisions can convert scale into EBITDA margin and EBIT-to-PAT conversion.$wu$, $wu$Industrials$wu$, $wu$Initiation$wu$, $wu$subscriber$wu$, $wu$6 min$wu$, 'published', date '2026-09-18', 1)
   on conflict (slug) do update set
     title = excluded.title, summary = excluded.summary, sector = excluded.sector, type = excluded.type,
     access = excluded.access, read_time = excluded.read_time, status = excluded.status,
@@ -126,7 +126,7 @@ on conflict (note_id) do update set body = excluded.body;
 
 with wu_adc_opportunity_2026 as (
   insert into public.notes (slug, title, summary, sector, type, access, read_time, status, published_at, version)
-  values ($wu$adc-opportunity-2026$wu$, $wu$ADC: the next frontier in pharma$wu$, $wu$Why the enabling ecosystem — chemistry, containment, bioconjugation, analytics, and supply — may outweigh the molecule, and where India's capability curve actually stands.$wu$, $wu$Healthcare$wu$, $wu$Framework$wu$, $wu$free$wu$, $wu$10 min$wu$, 'published', current_date, 1)
+  values ($wu$adc-opportunity-2026$wu$, $wu$ADC: the next frontier in pharma$wu$, $wu$Why the enabling ecosystem — chemistry, containment, bioconjugation, analytics, and supply — may outweigh the molecule, and where India's capability curve actually stands.$wu$, $wu$Healthcare$wu$, $wu$Framework$wu$, $wu$free$wu$, $wu$10 min$wu$, 'published', date '2026-09-15', 1)
   on conflict (slug) do update set
     title = excluded.title, summary = excluded.summary, sector = excluded.sector, type = excluded.type,
     access = excluded.access, read_time = excluded.read_time, status = excluded.status,

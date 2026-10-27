@@ -48,8 +48,8 @@ const SITE = {
     contactLine: "Institutional readers, allocators, and press can reach us through the access form or by email."
   },
   plans: [
-    { name: "Guest", price: "Free", sub: "No account", featured: false, items: ["Summaries of every writeup", "Selected notes in full, marked Free", "Disclaimer and methodology pages"], cta: { label: "Browse the library", href: "#/research" } },
-    { name: "Member", price: "Free", sub: "Registered account", featured: true, items: ["Everything in Guest", "Notes marked Member in full", "Email alert on every new writeup and update"], cta: { label: "Create a member account", href: "#/signup" } },
+    { name: "Guest", price: "Free", sub: "No account", featured: false, items: ["Selected notes in full, marked Free", "Disclaimer and methodology pages"], cta: { label: "Browse the library", href: "#/research" } },
+    { name: "Member", price: "Free", sub: "Registered account", featured: true, items: ["Everything in Guest", "Summaries of every writeup", "Notes marked Member in full", "Email alert on every new writeup and update"], cta: { label: "Create a member account", href: "#/signup" } },
     { name: "Subscriber", price: "Pricing on request", sub: "Annual", featured: false, items: ["Everything in Member", "Every initiation and update in full, on publication day", "Downloadable models (xlsx) and the quarterly call"], cta: { label: "Request subscriber access", href: "#/access?plan=subscriber" } }
   ],
   disclaimer: { updated: "September 2026", sections: [
@@ -81,11 +81,11 @@ const SAMPLE_NOTES = [
     title: "What we got wrong on specialty insurance in 2025",
     summary: "A pricing-cycle call that was right on direction and wrong on duration — and what it changed in our model.",
     body: "We initiated on the specialty lines in early 2025 on the view that hard-market pricing had a longer tail than the market assumed. The direction was right. The duration was not, and the kill condition — a second consecutive quarter of rate decreases in the core lines — triggered in the third quarter.\n\nThe error was one of extrapolation. Our model held retention flat while pricing softened, which is the one combination the cycle rarely delivers. When capacity returned, both moved at once.\n\nThe fix was structural rather than cosmetic: the model now links retention to rate change with a lag, and the bear case is required to include a capacity-return scenario for any name whose thesis rests on pricing. It is a more pessimistic model, and a better one.\n\nWe remain interested in the space at a different point in the cycle. The note stays in the library as published, with this post-mortem attached, because the original reasoning is the only honest record of what we believed and why." },
-  { slug: "industrial-distribution-compounders", type: "Deep dive", sector: "Industrials", published_at: "2026-08-05", read_time: "22 min", access: "member", status: "published", version: 1, file_path: "member/industrial-distribution-compounders.pdf",
+  { slug: "industrial-distribution-compounders", type: "Deep dive", sector: "Industrials", published_at: "2026-08-05", read_time: "22 min", access: "member", status: "published", version: 1, file_path: null,
     title: "The quiet compounders in industrial distribution",
     summary: "Why route density, not scale, is the moat — and how to tell which distributors actually have it.",
     body: "Industrial distribution is usually described as a scale business. It is not, or at least not primarily. The economics are set by route density: revenue per delivery stop, stops per route, and the gross margin those stops carry. A large distributor with thin density earns less on capital than a regional one with dense routes.\n\nThis matters because scale is visible in the income statement and density is not. To find it, we rebuild the branch footprint from filings and count stops per route where the company discloses enough to do so.\n\n## The three traits\n\nThe names that pass that screen share three traits:\n\n- Private-label penetration above a threshold.\n- A branch-manager incentive tied to local return on assets rather than revenue.\n- A working-capital cycle that shortens as the branch matures.\n\nEach is disclosed somewhere; none is headlined.\n\nValuation follows from the density model rather than from a peer multiple. We show the base, bear, and bull cases for two illustrative footprints, and the kill condition for each: a sustained decline in gross profit per stop while the branch count grows." },
-  { slug: "regional-banks-deposit-franchises", type: "Initiation", sector: "Financials", published_at: "2026-07-22", read_time: "31 min", access: "subscriber", status: "published", version: 3, file_path: "subscriber/regional-banks-deposit-franchises.pdf",
+  { slug: "regional-banks-deposit-franchises", type: "Initiation", sector: "Financials", published_at: "2026-07-22", read_time: "31 min", access: "subscriber", status: "published", version: 3, file_path: null,
     title: "Regional banks after the rate cycle: deposit franchises that still earn their keep",
     summary: "Separating the banks whose low-cost deposits survived the cycle from those that merely reported them.",
     body: "Every regional bank claims a low-cost deposit franchise. The cycle just ended was the first real test in fifteen years, and the results are now in the call reports. Our initiation ranks the franchises by the deposit beta they actually realised, not the one they guided to.\n\nThe gap between guided and realised beta is the single most useful number in the sector today, because it reveals how much of the \"core\" deposit base was rate-insensitive in fact rather than in management's description.\n\nFrom there the note rebuilds net interest income on a reset funding cost, stresses the securities book at two rate paths, and sets a kill condition per name tied to non-interest-bearing deposit mix rather than to earnings.\n\nThe full initiation includes the model, the ranking table, and the disclosure of positions held." },
@@ -485,14 +485,14 @@ function ensurePdfJs(){
   return pdfjsReady;
 }
 
-/* One bold, big "PRAJIT RESEARCH" repeating diagonal watermark, tiled so it covers the page corner to
-   corner. Text only — no email, no date, nothing else. Drawn twice per instance — once white, once
-   black, both semi-transparent and offset by a couple of pixels — so it stays legible whether the page
-   content underneath is light or dark. */
+/* A light, readable "PRAJIT RESEARCH" repeating diagonal watermark, tiled so it covers the page corner
+   to corner. Text only — no email, no date, nothing else. Drawn twice per instance — once white, once
+   black, both very faint and offset by a pixel — so it stays legible whether the page content underneath
+   is light or dark, without competing with the actual content for attention. */
 function drawWatermark(ctx, width, height, brandText){
   ctx.save();
-  const fontSize = Math.max(26, Math.round(width * 0.048));
-  ctx.font = `800 ${fontSize}px 'IBM Plex Mono', monospace`;
+  const fontSize = Math.max(20, Math.round(width * 0.032));
+  ctx.font = `500 ${fontSize}px 'IBM Plex Mono', monospace`;
   const textWidth = ctx.measureText(brandText).width;
   ctx.translate(width / 2, height / 2);
   ctx.rotate(-Math.PI / 6);
@@ -502,8 +502,8 @@ function drawWatermark(ctx, width, height, brandText){
   const span = Math.sqrt(width * width + height * height); // covers every corner once rotated
   for (let y = -span; y < span; y += stepY){
     for (let x = -span; x < span; x += stepX){
-      ctx.globalAlpha = 0.19; ctx.fillStyle = "#000000"; ctx.fillText(brandText, x + 2, y + 2);
-      ctx.globalAlpha = 0.19; ctx.fillStyle = "#FFFFFF"; ctx.fillText(brandText, x - 2, y - 2);
+      ctx.globalAlpha = 0.09; ctx.fillStyle = "#000000"; ctx.fillText(brandText, x + 1, y + 1);
+      ctx.globalAlpha = 0.09; ctx.fillStyle = "#FFFFFF"; ctx.fillText(brandText, x - 1, y - 1);
     }
   }
   ctx.restore();
@@ -604,7 +604,6 @@ class DemoStore {
     this.setPersona("member");
     return {};
   }
-  async signInWithMagicLink(email, meta){ this.personas.member = { ...this.personas.member, email, full_name: meta.full_name || "Demo Member", firm: meta.firm || "" }; this.setPersona("member"); return { demo: true }; }
   async requestPasswordReset(){ return { demo: true }; }
   async updatePassword(){ /* nothing to persist in demo mode — mirrors "nothing is saved" everywhere else */ }
   async reauthenticate(email, currentPassword){ if (currentPassword !== DEMO_PASSWORD) throw new Error("Current password is incorrect."); }
@@ -681,11 +680,6 @@ class LiveStore {
   async signInWithPassword(email, password){
     const { error } = await this.sb.auth.signInWithPassword({ email, password });
     if (error){ if (/email not confirmed/i.test(error.message)) throw new Error("Please confirm your email first — check your inbox for the confirmation link."); throw new Error("Incorrect email or password."); }
-  }
-  async signInWithMagicLink(email, meta, captchaToken){
-    const redirect = location.origin + location.pathname;
-    const { error } = await this.sb.auth.signInWithOtp({ email, options: { shouldCreateUser: false, data: { first_name: meta.first_name || "", last_name: meta.last_name || "", firm: meta.firm || "" }, emailRedirectTo: redirect, captchaToken } });
-    if (error) throw error; return { sent: true };
   }
   async requestPasswordReset(email, captchaToken){
     const redirect = location.origin + location.pathname;
@@ -876,7 +870,7 @@ async function researchView(){
   const s = search.trim().toLowerCase();
   const notes = all.filter(n => (filter === "All" || n.type === filter) && (!s || [n.title, n.summary, n.sector, n.type].join(" ").toLowerCase().includes(s)));
   return `
-  ${pageHead("Research library", "Every writeup, dated and versioned", "Summaries are open to everyone. Full notes open according to their access level — Free, Member, or Subscriber.")}
+  ${pageHead("Research library", "Every writeup, dated and versioned", "Sign in to read summaries. Full notes open according to their access level — Free, Member, or Subscriber.")}
   <section class="page-body">
     <div class="ledger-head">
       <div class="filters" role="group" aria-label="Filter by type">${types.map(t => `<button class="chip" type="button" data-filter="${esc(t)}" aria-pressed="${t === filter}">${esc(t)}</button>`).join("")}</div>
@@ -892,10 +886,10 @@ async function noteView(slug){
   if (n.status === "published") store.recordView(slug);
   const body = await store.getBody(n);
   const entitled = body !== null;
+  const signedIn = !!auth;
   const needs = n.access;
   let gate = "";
   if (!entitled){
-    const signedIn = !!auth;
     const headline = needs === "member" ? "The rest of this writeup is for members." : "The rest of this writeup is for subscribers.";
     const copy = needs === "member"
       ? (signedIn ? "Your account does not have member access yet." : "Member accounts are free. Sign in with your email and the full note opens immediately.")
@@ -905,13 +899,15 @@ async function noteView(slug){
   }
   const hasPdf = entitled && !!n.file_path;
   const pdfBlock = hasPdf ? `<div class="pdf-viewer" id="pdfViewer" data-path="${esc(n.file_path)}"></div>` : "";
-  const preview = !entitled ? `<p>${esc(n.summary)}</p>` : (hasPdf ? "" : renderBody(body));
+  // Summary is a reader perk, not a guest one: anonymous visitors only ever see the locked gate above,
+  // never the summary text, since publishing it with no account at all makes "free tier" meaningless.
+  const preview = entitled ? (hasPdf ? "" : renderBody(body)) : (signedIn ? `<p>${esc(n.summary)}</p>` : "");
   return `
   <a class="back" href="#/research">← Library</a>
   <section class="note-head" data-reveal-group>
     <p class="eyebrow" data-reveal>${esc(n.type)} · ${esc(n.sector)}${n.status === "draft" ? " · Draft (only admins can see this)" : ""}</p>
     <h1 class="note-title" data-reveal>${esc(n.title)}</h1>
-    <p class="lede" data-reveal>${esc(n.summary)}</p>
+    ${signedIn ? `<p class="lede" data-reveal>${esc(n.summary)}</p>` : `<p class="lede" data-reveal>Sign in to read the summary — it's free.</p>`}
     <dl class="meta" data-reveal>
       <div><dt>Published</dt><dd>${fmtDate(n.published_at)}</dd></div>
       <div><dt>Sector</dt><dd>${esc(n.sector)}</dd></div>
@@ -919,6 +915,7 @@ async function noteView(slug){
       <div><dt>Read time</dt><dd>${esc(n.read_time)}</dd></div>
       <div><dt>Version</dt><dd>v${esc(n.version || 1)}</dd></div>
       <div><dt>Access</dt><dd>${accessPill(n.access, n.status)}</dd></div>
+      <div><dt>Kill condition</dt><dd>${n.kill_triggered_at ? `Triggered on ${fmtDate(n.kill_triggered_at)}` : "Not triggered"}</dd></div>
     </dl>
   </section>
   <section class="note-body">
@@ -972,6 +969,7 @@ function signupView(){
         <div class="field"><label for="su-pass2">Confirm password</label><input id="su-pass2" name="password2" type="password" autocomplete="new-password" minlength="12" required></div>
       </div>
       ${turnstileWidget()}
+      <label class="check-row" data-reveal for="su-terms"><input id="su-terms" name="terms" type="checkbox" required> I have read and agree to the <a href="#/disclaimer" class="underline" target="_blank" rel="noopener">Disclaimer, Copyright &amp; Terms</a></label>
       <div class="cta-row" data-reveal><button class="btn" type="submit" id="signupSubmit">Create account</button><span class="small muted">Already have an account? <a href="#/signin" class="underline">Sign in</a></span></div>
       <div id="formMsg" hidden></div>
     </form>
@@ -991,14 +989,6 @@ function signinView(q){
         <div class="cta-row" data-reveal><button class="btn" type="submit" id="signinSubmit">Sign in</button><a class="btn link" href="#/forgot-password">Forgot password?</a></div>
         <div id="formMsg" hidden></div>
       </form>
-      <div class="magic-link mt-28">
-        <button type="button" class="btn link" id="magicLinkToggle">Or email me a one-time sign-in link</button>
-        <form class="form mt-16" id="magicLinkForm" hidden novalidate>
-          <div class="field"><label for="ml-email">Email</label><input id="ml-email" name="email" type="email" autocomplete="email" placeholder="you@firm.com" required></div>
-          <div class="cta-row"><button class="btn ghost sm" type="submit">Send link</button></div>
-          <div id="magicLinkMsg" hidden></div>
-        </form>
-      </div>
     </div>
   </section>`;
 }
@@ -1137,7 +1127,7 @@ async function adminWriteups(){
 
 async function adminEdit(slug){
   const isNew = slug === "new";
-  const n = isNew ? { id: null, slug: "", title: "", summary: "", sector: "", type: "Initiation", access: "member", read_time: "", status: "draft", published_at: todayISO(), file_path: null, version: 1 } : await store.getNote(slug);
+  const n = isNew ? { id: null, slug: "", title: "", summary: "", sector: "", type: "Initiation", access: "member", read_time: "", status: "draft", published_at: todayISO(), file_path: null, version: 1, kill_triggered_at: null } : await store.getNote(slug);
   if (!n) return adminShell("writeups", `<p class="err">Writeup not found.</p>`);
   const body = isNew ? "" : (await store.getBody(n)) ?? "";
   const types = ["Initiation", "Update", "Deep dive", "Post-mortem", "Framework", "Quarterly letter"];
@@ -1169,6 +1159,7 @@ async function adminEdit(slug){
         <div class="field"><label for="e-file">Attached document (PDF or spreadsheet, optional)</label><input id="e-file" name="file" type="file" accept=".pdf,.xlsx,.xls,.csv,.docx"><span class="hint">${n.file_path ? "Current: " + esc(n.file_path.split("/").pop()) + " — uploading replaces it." : "Stored privately; only entitled readers can download it."}</span></div>
         <div class="field"><label for="e-status">Status</label><select id="e-status" name="status"><option value="draft" ${n.status === "draft" ? "selected" : ""}>Draft — hidden from readers</option><option value="published" ${n.status === "published" ? "selected" : ""}>Published</option></select></div>
       </div>
+      <div class="field"><label for="e-kill">Kill condition triggered on</label><input id="e-kill" name="kill_triggered_at" type="date" value="${esc(n.kill_triggered_at || "")}"><span class="hint">Leave blank while the thesis holds. Shown on the writeup as "Not triggered" / "Triggered on [date]".</span></div>
       <div class="cta-row"><button class="btn" type="submit" id="saveBtn">Save</button>${isNew ? "" : `<button class="btn danger sm" type="button" data-del="${esc(n.id)}">Delete</button>`}<span class="small muted" id="saveState"></span></div>
       <div id="formMsg" hidden></div>
     </form>`);
@@ -1352,6 +1343,7 @@ function wire(r){
     if (!first_name || !last_name) return showMsg(`<p class="err">Enter your first and last name.</p>`);
     if (weakPassword(password, email)) return showMsg(`<p class="err">Password must be at least 12 characters and not contain your email.</p>`);
     if (password !== password2) return showMsg(`<p class="err">Passwords don't match.</p>`);
+    if (!f.get("terms")) return showMsg(`<p class="err">You must agree to the Disclaimer, Copyright &amp; Terms to create an account.</p>`);
     const btn = document.getElementById("signupSubmit"); btn.disabled = true;
     try {
       const res = await store.signUp(email, password, { first_name, last_name, firm: (f.get("firm") || "").trim() }, turnstileToken());
@@ -1369,20 +1361,6 @@ function wire(r){
     const btn = document.getElementById("signinSubmit"); btn.disabled = true;
     try { await store.signInWithPassword(email, password); auth = await store.getSession(); toast("Signed in"); location.hash = "#/account"; }
     catch (err) { btn.disabled = false; showMsg(`<p class="err">${esc(err.message)}</p>`); }
-  });
-
-  // sign in — magic link toggle + form
-  const mlToggle = document.getElementById("magicLinkToggle"), mlForm = document.getElementById("magicLinkForm");
-  if (mlToggle) mlToggle.addEventListener("click", () => { mlForm.hidden = !mlForm.hidden; if (!mlForm.hidden) mlForm.querySelector("input").focus(); });
-  if (mlForm) mlForm.addEventListener("submit", async e => {
-    e.preventDefault();
-    const f = new FormData(mlForm), email = (f.get("email") || "").trim();
-    if (!validEmail(email)) return showMsg(`<p class="err">Enter a valid email address.</p>`, "magicLinkMsg");
-    try {
-      await store.signInWithMagicLink(email, {});
-      showMsg(`<div class="ok"><p class="eyebrow bare">Check your email</p><p>If an account exists for <b>${esc(email)}</b>, we've sent a sign-in link. Open it on this device to continue.</p></div>`, "magicLinkMsg");
-      if (store.mode === "demo"){ toast("Demo mode: signed in as a member"); location.hash = "#/account"; }
-    } catch (err) { showMsg(`<p class="err">${esc(err.message)}</p>`, "magicLinkMsg"); }
   });
 
   // forgot password
@@ -1453,7 +1431,8 @@ function wire(r){
       const note = {
         id: ef.dataset.id || undefined, title: (f.get("title") || "").trim(), slug: slugify(f.get("slug") || f.get("title") || ""),
         summary: (f.get("summary") || "").trim(), sector: (f.get("sector") || "").trim(), type: f.get("type"), access: f.get("access"),
-        status: f.get("status"), published_at: f.get("published_at") || null, read_time: readTime(f.get("body")), file_path: ef.dataset.file || null
+        status: f.get("status"), published_at: f.get("published_at") || null, read_time: readTime(f.get("body")), file_path: ef.dataset.file || null,
+        kill_triggered_at: f.get("kill_triggered_at") || null
       };
       if (!note.id) delete note.id;
       if (!note.title || !note.slug || !note.summary) return showMsg(`<p class="err">Title, slug, and summary are required.</p>`);
