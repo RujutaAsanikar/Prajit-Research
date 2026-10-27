@@ -7,5 +7,8 @@ window.PRAJIT_CONFIG = {
   supabaseAnonKey: "",
   brand: "Prajit Research",
   established: "2026",
-  contactEmail: "hello@example.com"
+  contactEmail: "hello@example.com",
+  // Optional: a Cloudflare Turnstile site key to show a captcha on sign-up and forgot-password.
+  // Leave blank to skip the captcha entirely — nothing breaks either way.
+  turnstileSiteKey: ""
 };

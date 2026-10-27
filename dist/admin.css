@@ -1,0 +1,62 @@
+/* Prajit Research — admin dashboard theme.
+   Scoped entirely under :root[data-section="admin"] (set by app.js only while r.view === "admin").
+   Always dark, independent of the reader's OS light/dark preference — a real software-dashboard
+   feel deliberately distinct from the public site's warm editorial identity. Reuses every existing
+   component class (.tiles, table.t, .pill, .btn, .field, .admin-nav...) via the same custom-property
+   mechanism the site's own dark mode already uses — no admin view function needed to change. */
+:root[data-section="admin"]{
+  --ground:#0B0D10; --ground-2:#12151A; --ink:#E6E9ED; --ink-2:#9AA4B2; --ink-3:#6B7480;
+  --rule:#1E232B; --rule-strong:#2C333D;
+  --gold:#4C8DFF; --gold-ink:#4C8DFF; --gold-tint:#101825;
+  --btn-bg:#4C8DFF; --btn-fg:#0B0D10; --btn-bg-hover:#6FA3FF;
+  --ok:#3DDC97; --warn:#F5A623; --bad:#FF5C5C;
+  --serif:"Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.3); --shadow-md:0 12px 28px -10px rgba(0,0,0,.55);
+  color-scheme:dark;
+}
+
+/* Radius is used nowhere on the public site — reserved as an admin-only signal of "this is software." */
+:root[data-section="admin"] .tile,
+:root[data-section="admin"] .admin-nav,
+:root[data-section="admin"] .table-wrap,
+:root[data-section="admin"] .btn,
+:root[data-section="admin"] .chip,
+:root[data-section="admin"] .field input,
+:root[data-section="admin"] .field select,
+:root[data-section="admin"] .field textarea,
+:root[data-section="admin"] .inline-select,
+:root[data-section="admin"] .pill,
+:root[data-section="admin"] .demo{
+  border-radius:6px;
+}
+
+:root[data-section="admin"] .tile{background:var(--ground-2); border:1px solid var(--rule); box-shadow:var(--shadow-sm)}
+:root[data-section="admin"] .tiles{border:0}
+:root[data-section="admin"] .table-wrap{border:1px solid var(--rule); border-top:1px solid var(--rule); overflow:hidden}
+:root[data-section="admin"] table.t{font-size:14px}
+:root[data-section="admin"] table.t th{padding:10px 12px; background:var(--ground-2)}
+:root[data-section="admin"] table.t td{padding:10px 12px}
+:root[data-section="admin"] table.t tbody tr:nth-child(even){background:var(--ground-2)}
+:root[data-section="admin"] table.t tbody tr:hover{background:var(--gold-tint)}
+
+:root[data-section="admin"] .admin-nav{background:var(--ground-2); border:1px solid var(--rule); padding:14px}
+:root[data-section="admin"] .admin-nav a{border-bottom:0; padding:10px 10px; border-radius:4px}
+:root[data-section="admin"] .admin-nav a[aria-current="page"]{background:var(--ground); color:var(--gold-ink)}
+
+:root[data-section="admin"] .field input,
+:root[data-section="admin"] .field select,
+:root[data-section="admin"] .field textarea{
+  background:var(--ground-2); border:1px solid var(--rule-strong); padding:10px 12px;
+}
+:root[data-section="admin"] .field textarea.body{font-family:var(--mono)}
+
+:root[data-section="admin"] .body-help{background:var(--ground-2); border-color:var(--rule)}
+:root[data-section="admin"] .body-help code{background:var(--ground)}
+
+:root[data-section="admin"] .demo{background:var(--ground-2); border-color:var(--rule-strong)}
+
+/* the header/footer shell sits outside #app and inherits this scope too — deliberately, so the whole
+   page reads as "you've switched into the admin application," not just the content area. */
+:root[data-section="admin"] .site-head,
+:root[data-section="admin"] .site-foot{border-color:var(--rule)}
+:root[data-section="admin"] .nav a.admin-link{color:var(--gold-ink)}

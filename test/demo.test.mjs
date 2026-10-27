@@ -21,7 +21,9 @@ const browser = await chromium.launch({ executablePath: process.env.CHROMIUM || 
 const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
 const errors = []; page.on("pageerror", e => errors.push(String(e)));
 page.on("console", m => { if (m.type() === "error" && !/jsdelivr|net::ERR|Failed to load resource/.test(m.text())) errors.push(m.text()); });
-const go = async (hash) => { await page.goto(base + hash, { waitUntil: "load" }); await page.waitForFunction(() => !document.querySelector("#app .tiny") || document.querySelector("#app .tiny").textContent !== "Loading…"); await page.waitForTimeout(150); };
+// 400ms (not the old 150ms): render() now wraps the DOM swap in a route transition (View Transitions
+// API or a ~150ms fade fallback) — this buffer needs to comfortably clear that animation too.
+const go = async (hash) => { await page.goto(base + hash, { waitUntil: "load" }); await page.waitForFunction(() => !document.querySelector("#app .tiny") || document.querySelector("#app .tiny").textContent !== "Loading…"); await page.waitForTimeout(400); };
 const text = async (sel) => (await page.locator(sel).allTextContents()).join(" | ");
 
 // 1. Home
@@ -32,10 +34,10 @@ check("home shows 4 latest writeups", await page.locator("#research .row").count
 
 // 2. Library as guest
 await go("#/research");
-check("library lists 6 published (draft hidden)", await page.locator(".ledger .row").count() === 6);
+check("library lists 8 published (draft hidden)", await page.locator(".ledger .row").count() === 8);
 await page.click('[data-filter="Initiation"]');
 await page.waitForTimeout(200);
-check("type filter works", await page.locator(".ledger .row").count() === 2);
+check("type filter works", await page.locator(".ledger .row").count() === 3);
 await page.click('[data-filter="All"]');
 await page.fill("#searchBox", "memory"); await page.waitForTimeout(300);
 check("search works", await page.locator(".ledger .row").count() === 1);
@@ -44,7 +46,9 @@ check("search works", await page.locator(".ledger .row").count() === 1);
 await go("#/note/industrial-distribution-compounders");
 check("guest sees gate on member note", await page.locator(".gate").count() === 1);
 check("guest never receives gated body text", !(await page.content()).includes("route density: revenue per delivery stop"));
-check("guest gate offers sign-in", (await text(".gate .btn")).toLowerCase().includes("sign in"));
+// Phase 2 changed this CTA from "sign in" to "create a free account" — signup, not signin, is the
+// actual account-creation path now.
+check("guest gate offers account creation", (await text(".gate .btn")).toLowerCase().includes("create a free account"));
 await go("#/note/kill-conditions");
 check("guest reads free note in full", (await text(".prose")).includes("What a good kill condition looks like"));
 
@@ -72,13 +76,30 @@ await page.fill("#f-name", "Test Reader"); await page.fill("#f-email", "reader@e
 await page.click("#accessSubmit"); await page.waitForTimeout(300);
 check("request confirmation shown", (await text("#formMsg")).includes("Request received"));
 
-// 7. Sign-in form (demo) → account
-await go("#/signin");
-await page.fill("#s-email", "new@example.org"); await page.fill("#s-name", "New Reader");
-await page.click("#signinSubmit"); await page.waitForTimeout(400);
-check("demo sign-in lands on account", (await text("#app h2")).includes("New Reader"));
+// 7. Sign up (email + password) → account → sign out → sign in with password → forgot-password copy
+const DEMO_PASSWORD = "demo-pass-1234";
+await go("#/signup");
+await page.fill("#su-first", "New"); await page.fill("#su-last", "Reader");
+await page.fill("#su-email", "new@example.org");
+await page.fill("#su-pass", DEMO_PASSWORD); await page.fill("#su-pass2", DEMO_PASSWORD);
+await page.click("#signupSubmit"); await page.waitForTimeout(400);
+check("signup lands on account page", (await text("#app h2")).includes("New Reader"));
 await page.click("#signoutBtn"); await page.waitForTimeout(300);
 check("sign out returns to guest", (await text("#navAuth")) === "Sign in");
+
+await go("#/signin");
+await page.fill("#s-email", "anyone@example.org"); await page.fill("#s-pass", "wrong-password-entirely");
+await page.click("#signinSubmit"); await page.waitForTimeout(300);
+check("wrong password shows generic error", (await text("#formMsg")).toLowerCase().includes("incorrect"));
+await page.fill("#s-pass", DEMO_PASSWORD);
+await page.click("#signinSubmit"); await page.waitForTimeout(400);
+check("correct demo password signs in", (await text("#navAuth")) === "Account");
+await page.click("#signoutBtn"); await page.waitForTimeout(300);
+
+await go("#/forgot-password");
+await page.fill("#fp-email", "someone@example.org");
+await page.click("#forgotSubmit"); await page.waitForTimeout(300);
+check("forgot-password shows check-your-email copy", (await text("#formMsg")).toLowerCase().includes("check your email"));
 
 // 8. Admin
 await page.click('[data-persona="admin"]'); await page.waitForTimeout(300);
@@ -95,7 +116,7 @@ await go("#/admin/members");
 check("members table renders", (await page.locator("table.t tbody tr").count()) >= 5);
 await page.selectOption('[data-tier="demo-member"]', "subscriber"); await page.waitForTimeout(200);
 await go("#/admin/writeups");
-check("writeups list includes draft", (await text("table.t")).includes("Draft") && (await page.locator("table.t tbody tr").count()) === 7);
+check("writeups list includes draft", (await text("table.t")).includes("Draft") && (await page.locator("table.t tbody tr").count()) === 9);
 
 // 9. Create + publish a writeup
 await go("#/admin/edit/new");
@@ -108,7 +129,7 @@ await page.click("#saveBtn"); await page.waitForTimeout(400);
 check("save navigates to edit url", page.url().endsWith("#/admin/edit/test-note-from-admin"));
 await go("#/research");
 await page.fill("#searchBox", ""); await page.waitForTimeout(300);
-check("new note appears in library (7)", await page.locator(".ledger .row").count() === 7);
+check("new note appears in library (9)", await page.locator(".ledger .row").count() === 9);
 await go("#/note/test-note-from-admin");
 check("markdown-lite renders heading and list", await page.locator(".prose h3").count() === 1 && await page.locator(".prose li").count() === 2);
 await go("#/admin/writeups");
@@ -116,7 +137,7 @@ const toggle = page.locator('[data-toggle]').filter({ hasText: "Unpublish" }).fi
 await toggle.click(); await page.waitForTimeout(300);
 check("unpublish works", (await text('tr:has-text("Test Note From Admin") .pill')).includes("Draft"));
 const del = page.locator('tr:has-text("Test Note From Admin") [data-del]'); await del.click(); await page.waitForTimeout(100); await del.click(); await page.waitForTimeout(300);
-check("delete works (7 rows left)", (await page.locator("table.t tbody tr").count()) === 7 && !(await text("table.t")).includes("Test Note From Admin"));
+check("delete works (9 rows left)", (await page.locator("table.t tbody tr").count()) === 9 && !(await text("table.t")).includes("Test Note From Admin"));
 
 // 10. Mobile width, no horizontal scroll
 const m = await browser.newPage({ viewport: { width: 400, height: 800 } });

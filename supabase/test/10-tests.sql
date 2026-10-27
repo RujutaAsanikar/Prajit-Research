@@ -18,15 +18,23 @@ end $$;
 insert into public.admin_emails(email) values ('admin@prajit.test');
 insert into public.access_requests(name,email,plan,status) values ('Pre-approved','sub@prajit.test','subscriber','approved');
 insert into auth.users(id,email,raw_user_meta_data) values
-  ('00000000-0000-0000-0000-000000000001','admin@prajit.test','{"full_name":"Admin"}'),
-  ('00000000-0000-0000-0000-000000000002','member@prajit.test','{"full_name":"Member","firm":"Indie"}'),
-  ('00000000-0000-0000-0000-000000000003','sub@prajit.test','{"full_name":"Sub"}');
+  ('00000000-0000-0000-0000-000000000001','admin@prajit.test','{"first_name":"Admin","last_name":"User"}'),
+  ('00000000-0000-0000-0000-000000000002','member@prajit.test','{"full_name":"Member Legacy","firm":"Indie"}'),
+  ('00000000-0000-0000-0000-000000000003','sub@prajit.test','{"first_name":"Sub","last_name":"Scriber"}');
 
 do $$ begin
   assert (select is_admin from profiles where email='admin@prajit.test'), 'admin flag from allowlist';
   assert (select tier from profiles where email='member@prajit.test') = 'member', 'default tier member';
   assert (select tier from profiles where email='sub@prajit.test') = 'subscriber', 'pre-approved request applied on signup';
   assert (select firm from profiles where email='member@prajit.test') = 'Indie', 'metadata copied';
+  -- password-signup metadata (first_name/last_name) populates both columns and the generated full_name
+  assert (select first_name from profiles where email='admin@prajit.test') = 'Admin', 'first_name from new-style metadata';
+  assert (select last_name from profiles where email='admin@prajit.test') = 'User', 'last_name from new-style metadata';
+  assert (select full_name from profiles where email='admin@prajit.test') = 'Admin User', 'full_name generated from first+last';
+  -- legacy magic-link metadata (full_name only) still splits into first_name/last_name via the fallback
+  assert (select first_name from profiles where email='member@prajit.test') = 'Member', 'legacy full_name splits to first_name';
+  assert (select last_name from profiles where email='member@prajit.test') = 'Legacy', 'legacy full_name splits to last_name';
+  assert (select full_name from profiles where email='member@prajit.test') = 'Member Legacy', 'full_name regenerated matches original legacy value';
 end $$;
 
 -- Admin creates three notes
@@ -85,8 +93,9 @@ do $$ begin
   assert (select count(*) from storage.objects) = 1 and (select name from storage.objects) = 'member/member-note.pdf', 'member can only see member docs';
   assert (select count(*) from access_requests) = 0, 'member cannot read requests';
 end $$;
-update profiles set full_name='Member Renamed' where id='00000000-0000-0000-0000-000000000002';
+update profiles set first_name='Member', last_name='Renamed' where id='00000000-0000-0000-0000-000000000002';
 do $$ begin
+  assert (select full_name from profiles where id='00000000-0000-0000-0000-000000000002') = 'Member Renamed', 'full_name recomputes after editing first_name/last_name';
   begin
     update profiles set tier='subscriber' where id='00000000-0000-0000-0000-000000000002';
     raise exception 'member escalated own tier';

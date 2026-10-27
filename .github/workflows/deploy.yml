@@ -1,0 +1,48 @@
+name: Build and deploy site
+
+# Optional upgrade — inactive until "Settings -> Pages -> Source" is switched to "GitHub Actions".
+# Until then this workflow simply doesn't run, and the existing manual "drag dist/ into the repo"
+# process (see SETUP.md) keeps working exactly as before. Once enabled, every push to main rebuilds
+# the site with `node build.mjs` and publishes dist/ automatically — no manual file upload needed,
+# and no more risk of motion.js/admin.css being forgotten on a manual upload.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # No npm install needed — build.mjs uses only Node's built-in fs module.
+      - name: Build
+        run: node build.mjs
+
+      - name: Upload dist/ as the Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

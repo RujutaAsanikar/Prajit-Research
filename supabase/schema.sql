@@ -294,3 +294,81 @@ insert into public.note_bodies (note_id, body)
 select id, 'Paragraphs are separated by a blank line.' || E'\n\n' || '## Headings start with two hashes' || E'\n\n' || '- Bullets start with a dash' || E'\n' || '- Like this'
 from public.notes where slug = 'example-writeup'
 on conflict (note_id) do nothing;
+
+-- ---------------------------------------------------------------------
+-- 10. Structured names for password-based signup (v2). Safe to re-run:
+--     backfills first_name/last_name from any existing full_name before
+--     turning full_name into a generated column, so no reader's name is lost.
+-- ---------------------------------------------------------------------
+alter table public.profiles add column if not exists first_name text not null default '';
+alter table public.profiles add column if not exists last_name  text not null default '';
+
+do $$
+begin
+  if exists (
+    select 1 from information_schema.columns
+    where table_schema = 'public' and table_name = 'profiles' and column_name = 'full_name'
+      and is_generated = 'NEVER'
+  ) then
+    update public.profiles
+      set first_name = coalesce(nullif(split_part(full_name, ' ', 1), ''), first_name),
+          last_name  = coalesce(nullif(trim(substring(full_name from length(split_part(full_name, ' ', 1)) + 1)), ''), last_name)
+      where first_name = '' and last_name = '' and full_name <> '';
+    alter table public.profiles drop column full_name;
+  end if;
+end $$;
+
+alter table public.profiles
+  add column if not exists full_name text
+  generated always as (trim(both ' ' from (first_name || ' ' || last_name))) stored;
+
+-- New signups now send first_name/last_name (password-based signup) or full_name (legacy magic-link
+-- metadata, kept as a fallback) in raw_user_meta_data; split full_name into first/last if that's all we get.
+create or replace function public.handle_new_user() returns trigger
+language plpgsql security definer set search_path = public as $$
+declare
+  v_tier text := 'member';
+  v_first text := coalesce(new.raw_user_meta_data ->> 'first_name', '');
+  v_last  text := coalesce(new.raw_user_meta_data ->> 'last_name', '');
+  v_legacy_full text := coalesce(new.raw_user_meta_data ->> 'full_name', '');
+begin
+  if v_first = '' and v_last = '' and v_legacy_full <> '' then
+    v_first := split_part(v_legacy_full, ' ', 1);
+    v_last := trim(substring(v_legacy_full from length(v_first) + 1));
+  end if;
+  if exists (select 1 from public.access_requests r
+             where lower(r.email) = lower(new.email) and r.status = 'approved' and r.plan = 'subscriber') then
+    v_tier := 'subscriber';
+  end if;
+  insert into public.profiles (id, email, first_name, last_name, firm, tier, is_admin)
+  values (
+    new.id, new.email, v_first, v_last,
+    coalesce(new.raw_user_meta_data ->> 'firm', ''),
+    v_tier,
+    exists (select 1 from public.admin_emails a where lower(a.email) = lower(new.email))
+  )
+  on conflict (id) do nothing;
+  return new;
+end;
+$$;
+
+-- ---------------------------------------------------------------------
+-- 11. Basic spam throttle on public access-request submissions. Supabase's
+--     Auth captcha doesn't cover plain table inserts through PostgREST, so
+--     this rate-limits by email instead (pair with a client-side honeypot).
+-- ---------------------------------------------------------------------
+create or replace function public.guard_request_rate() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  if exists (
+    select 1 from public.access_requests
+    where lower(email) = lower(new.email) and created_at > now() - interval '10 minutes'
+  ) then
+    raise exception 'Please wait a few minutes before submitting another request.';
+  end if;
+  return new;
+end;
+$$;
+drop trigger if exists access_requests_rate_limit on public.access_requests;
+create trigger access_requests_rate_limit before insert on public.access_requests
+  for each row execute procedure public.guard_request_rate();
