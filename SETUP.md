@@ -26,14 +26,10 @@ The database stores writeups, member accounts, and view counts, and decides who 
 
 ## Step 2 — Put the site on the internet (GitHub Pages, free)
 
-GitHub is a free service that hosts the website files.
-
-1. Go to **github.com** → sign in → top-right **+** → **New repository**. Name: `prajit-research`. Keep it **Public**. Click **Create repository**.
-2. On the new repository page click **uploading an existing file** (or **Add file → Upload files**).
-3. Drag in **every file inside the `dist` folder**: `index.html`, `app.js`, `styles.css`, `config.js`, `CNAME`, `.nojekyll`. (Hidden files: on Mac press Cmd+Shift+. in the file dialog to see `.nojekyll`.) Click **Commit changes**.
-4. Repository → **Settings** tab → left sidebar **Pages**.
-5. Under **Build and deployment**: Source = **Deploy from a branch**; Branch = **main**, folder **/ (root)** → **Save**.
-6. Wait a minute, refresh. The page shows "Your site is live at …github.io/prajit-research/". Open it — the demo bar at the top should be gone.
+Already done — the repository exists, and it rebuilds and republishes itself automatically every time
+files are updated (via `.github/workflows/deploy.yml`, under **Settings → Pages → Source: GitHub Actions**).
+Nothing to do here. If you ever need to double-check it's running: repository → **Actions** tab → the latest
+"Build and deploy site" run should show a green checkmark.
 
 ## Step 3 — Connect prajitresearch.com
 
@@ -50,7 +46,7 @@ GitHub is a free service that hosts the website files.
    | CNAME | `www` | `<your-github-username>.github.io` |
 
    Delete any old A or CNAME records for `@` and `www` that the registrar added by default ("parking" pages).
-4. Back on GitHub **Settings → Pages**, wait for the green "DNS check successful" (a few minutes to an hour), then tick **Enforce HTTPS**.
+4. Back on GitHub **Settings → Pages**, wait for the green "DNS check successful" (a few minutes to an hour). **Enforce HTTPS** is already turned on.
 5. Open **https://prajitresearch.com** — the site should load with the padlock.
 
 ## Step 4 — Tell the database the site's address
@@ -94,19 +90,7 @@ There is no card payment on the site yet. When someone pays you (invoice, bank t
 ## Updating the site later
 
 - **Writeups, members, requests**: all inside the admin, no files involved.
-- **Copy or design**: send me the change; I return new files; you upload them to the GitHub repository (Add file → Upload files, replace).
-
-## Optional: stop uploading files by hand
-
-There's now a ready-made automation (`.github/workflows/deploy.yml`) that rebuilds and republishes the site
-automatically every time new files are pushed to the repository — no more dragging files into GitHub's upload
-screen, and no more risk of forgetting to include a new file. **It does nothing until you turn it on**, so
-there's no rush and nothing breaks if you skip this.
-
-To turn it on: repository → **Settings → Pages** → under **Build and deployment**, change **Source** from
-"Deploy from a branch" to **"GitHub Actions"**. From then on, every time files are updated in the repository,
-the site rebuilds and republishes itself within about a minute — same domain, same custom-domain setup, no
-other changes needed.
+- **Copy or design**: send me the change; I push the update to the repository and it goes live automatically within about a minute.
 
 ## What the security actually does
 
