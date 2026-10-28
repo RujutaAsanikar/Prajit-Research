@@ -11,7 +11,7 @@ const CFG = Object.assign({ brand: "Prajit Research", established: "2026", conta
 /* =====================================================================
    SITE COPY — edit freely
    ===================================================================== */
-const SITE = {
+const SITE_DEFAULTS = {
   hero: {
     eyebrow: "Independent equity research",
     titleHtml: 'Patient research for impatient <em class="accent">markets.</em>',
@@ -70,6 +70,54 @@ const SITE = {
     { h: "Requests", p: "Permission requests, takedown notices, and licensing enquiries should be sent to the contact address on the access page." }
   ]}
 };
+
+/* Every view function above reads from this mutable `SITE` — it starts as a copy of SITE_DEFAULTS and is
+   replaced wholesale (applyContentOverrides) once the store's saved overrides load, so admin edits made on
+   #/admin/content show up everywhere without touching the dozens of call sites that already say `SITE.xxx`. */
+let SITE = structuredClone(SITE_DEFAULTS);
+
+// Keys excluded from admin content-editing because they're structural (a route target), not copy —
+// editing one wrong would silently break navigation rather than just reading oddly.
+const CONTENT_EXCLUDE_KEYS = new Set(["href"]);
+
+function flattenContent(obj, prefix = ""){
+  const out = [];
+  if (Array.isArray(obj)) obj.forEach((v, i) => out.push(...flattenContent(v, `${prefix}[${i}]`)));
+  else if (obj && typeof obj === "object"){
+    for (const k of Object.keys(obj)){
+      if (CONTENT_EXCLUDE_KEYS.has(k)) continue;
+      out.push(...flattenContent(obj[k], prefix ? `${prefix}.${k}` : k));
+    }
+  }
+  else if (typeof obj === "string") out.push({ key: prefix, value: obj });
+  return out;
+}
+
+function setByPath(root, path, value){
+  const tokens = path.match(/[^.[\]]+/g) || [];
+  let node = root;
+  for (let i = 0; i < tokens.length - 1; i++){
+    node = node[/^\d+$/.test(tokens[i]) ? Number(tokens[i]) : tokens[i]];
+    if (node == null) return;
+  }
+  const last = tokens[tokens.length - 1];
+  if (last !== undefined) node[/^\d+$/.test(last) ? Number(last) : last] = value;
+}
+
+function applyContentOverrides(rows){
+  const next = structuredClone(SITE_DEFAULTS);
+  rows.forEach(({ key, value }) => { try { setByPath(next, key, value); } catch (_) {} });
+  SITE = next;
+}
+
+// "philosophy.tenets[1].title" -> "Philosophy — Tenets 2 — Title"
+function contentLabel(path){
+  return path.replace(/\[(\d+)\]/g, (_, n) => `.${Number(n) + 1}`).split(".")
+    .map(s => s.replace(/([a-z0-9])([A-Z])/g, "$1 $2"))
+    .map(s => s.charAt(0).toUpperCase() + s.slice(1))
+    .join(" — ");
+}
+const CONTENT_GROUP_LABEL = { hero: "Home — Hero", stats: "Home — Stats", philosophy: "Home — Philosophy", process: "Home — Process", about: "Home — About", plans: "Plans / pricing", disclaimer: "Disclaimer page", copyright: "Copyright page" };
 
 /* Sample writeups: illustrative only — no claims about real companies. Used in demo mode. */
 const SAMPLE_NOTES = [
@@ -586,6 +634,7 @@ class DemoStore {
     ];
     this.persona = null;
     this.listeners = [];
+    this.content = [];
   }
   get profile(){ return this.persona ? this.personas[this.persona] : null; }
   async getSession(){ return this.profile ? { user: { id: this.profile.id, email: this.profile.email }, profile: this.profile } : null; }
@@ -633,6 +682,8 @@ class DemoStore {
   async updateRequest(id, status){ const r = this.requests.find(x => x.id === id); if (!r) return; r.status = status; if (status === "approved"){ const m = this.members.find(m => m.email.toLowerCase() === r.email.toLowerCase()); if (m && RANK[r.plan] > RANK[m.tier]) m.tier = r.plan; } }
   async listMembers(){ return this.members.slice().sort((a, b) => b.created_at.localeCompare(a.created_at)); }
   async setTier(id, tier){ const m = this.members.find(x => x.id === id); if (m) m.tier = tier; }
+  async listContent(){ return this.content.slice(); }
+  async saveContent(rows){ rows.forEach(({ key, value }) => { const i = this.content.findIndex(c => c.key === key); if (i >= 0) this.content[i].value = value; else this.content.push({ key, value }); }); }
   async uploadFile(access, slug, file){ return `${access}/${slug}.${(file.name.split(".").pop() || "pdf").toLowerCase()}`; }
   async fileUrl(path){
     // Demo-mode-only static copies for local preview (kept outside the git-tracked project folder —
@@ -719,6 +770,8 @@ class LiveStore {
   async updateRequest(id, status){ const { error } = await this.sb.rpc("review_request", { p_id: id, p_status: status }); if (error) throw error; }
   async listMembers(){ const { data, error } = await this.sb.from("profiles").select("*").order("created_at", { ascending: false }); if (error) throw error; return data || []; }
   async setTier(id, tier){ const { error } = await this.sb.from("profiles").update({ tier }).eq("id", id); if (error) throw error; }
+  async listContent(){ const { data, error } = await this.sb.from("site_content").select("key, value"); if (error) throw error; return data || []; }
+  async saveContent(rows){ const payload = rows.map(({ key, value }) => ({ key, value, updated_by: this.user?.id || null })); const { error } = await this.sb.from("site_content").upsert(payload, { onConflict: "key" }); if (error) throw error; }
   async uploadFile(access, slug, file){
     const ext = (file.name.split(".").pop() || "pdf").toLowerCase();
     const path = `${access}/${slug}.${ext}`;
@@ -758,6 +811,7 @@ async function boot(){
     store = new LiveStore(window.supabase.createClient(CFG.supabaseUrl, CFG.supabaseAnonKey));
     try { await store.init(); } catch (e) { console.error("Supabase init failed:", e); }
   } else store = new DemoStore();
+  try { applyContentOverrides(await store.listContent()); } catch (e) { console.error("Site content load failed:", e); }
   store.onAuth(async () => { auth = await store.getSession(); renderChrome(); render(); });
   auth = await store.getSession();
   renderChrome();
@@ -1078,7 +1132,7 @@ function legalView(kind){
    ADMIN VIEWS
    ===================================================================== */
 function adminShell(tab, inner){
-  const tabs = [["", "Overview"], ["writeups", "Writeups"], ["members", "Members"], ["requests", "Requests"]];
+  const tabs = [["", "Overview"], ["writeups", "Writeups"], ["members", "Members"], ["requests", "Requests"], ["content", "Content"]];
   return `
   ${pageHead("Admin", "Research desk", "")}
   <section class="admin">
@@ -1196,6 +1250,27 @@ async function adminRequests(){
     <p class="small muted">Approving a subscriber request upgrades the account with that email if it exists, and upgrades it automatically when that reader first signs in.</p>`);
 }
 
+async function adminContent(){
+  const overrides = Object.fromEntries((await store.listContent()).map(r => [r.key, r.value]));
+  const fields = flattenContent(SITE_DEFAULTS).map(f => ({ key: f.key, value: overrides[f.key] ?? f.value, group: f.key.split(/[.[]/)[0] }));
+  const groups = [...new Set(fields.map(f => f.group))];
+  return adminShell("content", `
+    <div class="admin-head"><h3>Site content</h3><span class="small muted">Edit the copy shown across the public site — home page, philosophy, process, about, plans, disclaimer, copyright. Changes apply immediately, everywhere that text appears.</span></div>
+    <form class="form wide" id="contentForm">
+      ${groups.map(g => `
+        <fieldset class="content-group"><legend>${esc(CONTENT_GROUP_LABEL[g] || g)}</legend>
+          ${fields.filter(f => f.group === g).map(f => `
+            <div class="field"><label for="c-${esc(f.key)}">${esc(contentLabel(f.key))}</label>
+              ${f.value.length > 90 || f.value.includes("\n")
+                ? `<textarea id="c-${esc(f.key)}" data-content-key="${esc(f.key)}" data-original="${esc(f.value)}">${esc(f.value)}</textarea>`
+                : `<input id="c-${esc(f.key)}" type="text" data-content-key="${esc(f.key)}" data-original="${esc(f.value)}" value="${esc(f.value)}">`}
+            </div>`).join("")}
+        </fieldset>`).join("")}
+      <div class="cta-row"><button class="btn" type="submit" id="contentSaveBtn">Save changes</button><span class="small muted" id="contentSaveState"></span></div>
+      <div id="contentMsg" hidden></div>
+    </form>`);
+}
+
 /* =====================================================================
    RENDER + WIRING
    ===================================================================== */
@@ -1237,6 +1312,7 @@ async function render(){
         else if (r.arg === "edit") html = await adminEdit(r.arg2 || "new");
         else if (r.arg === "members") html = await adminMembers();
         else if (r.arg === "requests") html = await adminRequests();
+        else if (r.arg === "content") html = await adminContent();
         else html = await adminOverview();
         break;
       default: html = await homeView();
@@ -1450,6 +1526,25 @@ function wire(r){
   // admin: members + requests
   document.querySelectorAll("[data-tier]").forEach(s => s.addEventListener("change", async () => { try { await store.setTier(s.dataset.tier, s.value); toast("Access updated"); } catch (e) { toast("Failed: " + e.message); render(); } }));
   document.querySelectorAll("[data-req]").forEach(b => b.addEventListener("click", async () => { try { await store.updateRequest(b.dataset.req, b.dataset.status); toast(b.dataset.status === "approved" ? "Approved" : "Declined"); render(); } catch (e) { toast("Failed: " + e.message); } }));
+
+  // admin: site content
+  const cf = document.getElementById("contentForm");
+  if (cf){
+    cf.addEventListener("submit", async e => {
+      e.preventDefault();
+      const changed = [...cf.querySelectorAll("[data-content-key]")]
+        .filter(el => el.value !== el.dataset.original)
+        .map(el => ({ key: el.dataset.contentKey, value: el.value }));
+      if (!changed.length){ toast("Nothing changed"); return; }
+      const btn = document.getElementById("contentSaveBtn"); btn.disabled = true; document.getElementById("contentSaveState").textContent = "Saving…";
+      try {
+        await store.saveContent(changed);
+        changed.forEach(({ key, value }) => setByPath(SITE, key, value));
+        changed.forEach(({ key, value }) => { const el = cf.querySelector(`[data-content-key="${CSS.escape(key)}"]`); if (el) el.dataset.original = value; });
+        toast("Saved"); document.getElementById("contentSaveState").textContent = ""; btn.disabled = false;
+      } catch (err) { btn.disabled = false; document.getElementById("contentSaveState").textContent = ""; showMsg(`<p class="err">Could not save: ${esc(err.message)}</p>`, "contentMsg"); }
+    });
+  }
 }
 
 boot();

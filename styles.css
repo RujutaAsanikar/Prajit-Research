@@ -273,6 +273,8 @@ hr.rule{border:0; border-top:1px solid var(--rule); margin:0}
 /* forms */
 .form{display:grid; gap:22px; max-width:640px}
 .form.wide{max-width:none}
+.content-group{border:0; border-top:1px solid var(--rule); margin:0; padding:24px 0 0; display:grid; gap:22px}
+.content-group legend{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-2); padding:0 0 4px}
 .field{display:grid; gap:8px}
 .field label{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-2)}
 .field input,.field select,.field textarea{font-family:var(--serif); font-size:18px; color:var(--ink); background:transparent; border:0; border-bottom:1px solid var(--rule-strong); padding:10px 0; width:100%; border-radius:0}
