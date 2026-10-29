@@ -817,16 +817,43 @@ async function boot(){
   renderChrome();
   document.getElementById("menuBtn").addEventListener("click", e => { const nav = document.getElementById("nav"), open = nav.classList.toggle("open"); e.currentTarget.setAttribute("aria-expanded", String(open)); });
   document.getElementById("copyLine").textContent = `© ${CFG.established}–${new Date().getFullYear()} ${CFG.brand}`;
+  // Account menu: wired once here (not in renderChrome, which reruns on every auth change) so the
+  // listeners never accumulate on the same static buttons.
+  document.getElementById("avatarBtn").addEventListener("click", e => {
+    e.stopPropagation();
+    const dd = document.getElementById("accountDropdown"), wasOpen = !dd.hidden;
+    closeAccountDropdown();
+    if (!wasOpen){ dd.hidden = false; document.getElementById("avatarBtn").setAttribute("aria-expanded", "true"); }
+  });
+  document.getElementById("signoutBtn2").addEventListener("click", async () => { await store.signOut(); auth = null; renderChrome(); location.hash = "#/"; toast("Signed out"); });
+  document.addEventListener("click", e => { if (!e.target.closest(".account-menu")) closeAccountDropdown(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeAccountDropdown(); });
   window.addEventListener("hashchange", render);
   render();
 }
 
+const initialsOf = name => {
+  const parts = String(name || "").trim().split(/\s+/).filter(Boolean);
+  if (!parts.length) return "?";
+  return parts.length === 1 ? parts[0].slice(0, 2).toUpperCase() : (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+};
+function closeAccountDropdown(){
+  const dd = document.getElementById("accountDropdown"), btn = document.getElementById("avatarBtn");
+  if (dd && !dd.hidden){ dd.hidden = true; btn.setAttribute("aria-expanded", "false"); }
+}
 function renderChrome(){
   const navAuth = document.getElementById("navAuth"), navAdmin = document.getElementById("navAdmin"), navSignup = document.getElementById("navSignup");
-  navAuth.textContent = auth ? "Signed in" : "Sign in";
-  navAuth.setAttribute("href", auth ? "#/account" : "#/signin");
-  navSignup.hidden = !!auth; // only a guest needs "Create account" — a signed-in reader already has one
+  const accountMenu = document.getElementById("accountMenu"), avatarBtn = document.getElementById("avatarBtn");
+  navAuth.hidden = !!auth;
+  navSignup.hidden = !!auth;
+  accountMenu.hidden = !auth;
   navAdmin.hidden = !(auth && auth.profile.is_admin);
+  if (auth){
+    const name = auth.profile.full_name || auth.user.email;
+    avatarBtn.textContent = initialsOf(name);
+    document.getElementById("ddName").textContent = name;
+    document.getElementById("ddEmail").textContent = auth.user.email;
+  } else closeAccountDropdown();
   const bar = document.getElementById("demoBar");
   if (store.mode === "demo"){
     const p = store.persona || "";
@@ -852,6 +879,7 @@ function setNav(view){
   });
   document.getElementById("nav").classList.remove("open");
   document.getElementById("menuBtn").setAttribute("aria-expanded", "false");
+  closeAccountDropdown();
 }
 
 /* =====================================================================
@@ -908,10 +936,10 @@ async function homeView(){
     <div class="section-body"><div class="ledger" data-reveal>${ledgerRows(latest)}</div></div>
   </section>
   <section class="section" id="plans">
-    <div class="section-rail"><p class="eyebrow">Access</p><h2>Three ways to read</h2></div>
-    <div class="section-body"><div class="plans">${SITE.plans.map(p => `
-      <div class="plan${p.featured ? " featured" : ""}${p.disabled ? " disabled" : ""}"><p class="eyebrow">${esc(p.name)}</p><div class="price">${esc(p.price)}<small>${esc(p.sub)}</small></div>
-        <ul>${p.items.map(i => `<li>${esc(i)}</li>`).join("")}</ul>${p.disabled ? `<span class="btn ghost disabled" aria-disabled="true">Not open yet</span>` : `<a class="btn ${p.featured ? "" : "ghost"}" href="${p.cta.href}">${esc(p.cta.label)}</a>`}</div>`).join("")}</div></div>
+    <div class="section-rail"><p class="eyebrow">Access</p><h2>Two ways to read</h2></div>
+    <div class="section-body"><div class="plans">${SITE.plans.filter(p => !p.disabled).map(p => `
+      <div class="plan${p.featured ? " featured" : ""}"><p class="eyebrow">${esc(p.name)}</p><div class="price">${esc(p.price)}<small>${esc(p.sub)}</small></div>
+        <ul>${p.items.map(i => `<li>${esc(i)}</li>`).join("")}</ul><a class="btn ${p.featured ? "" : "ghost"}" href="${p.cta.href}">${esc(p.cta.label)}</a></div>`).join("")}</div></div>
   </section>
   <section class="section" id="about">
     <div class="section-rail"><p class="eyebrow">About</p><h2>Independent, by design</h2></div>

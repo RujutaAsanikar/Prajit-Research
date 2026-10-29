@@ -30,7 +30,7 @@ const text = async (sel) => (await page.locator(sel).allTextContents()).join(" |
 await go("#/");
 check("home renders hero", (await text("h1")).includes("Patient research"));
 check("demo bar visible", await page.locator("#demoBar .demo").isVisible());
-check("nav shows Create account + Sign in for a guest", await page.locator("#navSignup").isVisible() && (await text("#navSignup")) === "Create account" && (await text("#navAuth")) === "Sign in");
+check("nav shows Sign in + Sign up for a guest, no avatar", await page.locator("#navSignup").isVisible() && (await text("#navSignup")) === "Sign up" && (await text("#navAuth")) === "Sign in" && !(await page.locator("#accountMenu").isVisible()));
 check("home shows 4 latest writeups", await page.locator("#research .row").count() === 4);
 
 // 2. Library as guest
@@ -61,8 +61,12 @@ await go("#/note/gmm-pfaudler-transformation-thesis");
 check("member still gated on the real subscriber writeup", await page.locator(".gate").count() === 1);
 await go("#/note/regional-banks-deposit-franchises");
 check("member is gated on subscriber note, with no live request CTA (paused)", await page.locator(".gate").count() === 1 && await page.locator(".gate .btn").count() === 0 && (await text(".gate")).toLowerCase().includes("isn't open yet"));
-check("nav shows Signed in when signed in", (await text("#navAuth")) === "Signed in");
-check("nav hides Create account once signed in", !(await page.locator("#navSignup").isVisible()));
+check("nav shows avatar initials, hides Sign in/Sign up, when signed in", await page.locator("#accountMenu").isVisible() && (await text("#avatarBtn")) === "DM" && !(await page.locator("#navAuth").isVisible()) && !(await page.locator("#navSignup").isVisible()));
+check("account dropdown starts closed", !(await page.locator("#accountDropdown").isVisible()));
+await page.click("#avatarBtn"); await page.waitForTimeout(200);
+check("clicking the avatar opens the dropdown with name, email, settings, sign out", await page.locator("#accountDropdown").isVisible() && (await text("#ddName")) === "Demo Member" && (await text("#ddEmail")) === "member@example.com" && await page.locator("#ddSettings").isVisible() && await page.locator("#signoutBtn2").isVisible());
+await page.click("body", { position: { x: 10, y: 10 } }); await page.waitForTimeout(200);
+check("clicking outside closes the dropdown", !(await page.locator("#accountDropdown").isVisible()));
 await go("#/account");
 check("account page says You're signed in", (await text("#app .eyebrow")).includes("Signed in"));
 
@@ -93,7 +97,7 @@ await page.check("#su-terms");
 await page.click("#signupSubmit"); await page.waitForTimeout(400);
 check("signup lands on account page", (await text("#app h2")).includes("New Reader"));
 await page.click("#signoutBtn"); await page.waitForTimeout(300);
-check("sign out returns to guest", (await text("#navAuth")) === "Sign in");
+check("sign out (from account page) returns to guest nav", await page.locator("#navAuth").isVisible() && !(await page.locator("#accountMenu").isVisible()));
 
 await go("#/signin");
 await page.fill("#s-email", "anyone@example.org"); await page.fill("#s-pass", "wrong-password-entirely");
@@ -101,8 +105,10 @@ await page.click("#signinSubmit"); await page.waitForTimeout(300);
 check("wrong password shows generic error", (await text("#formMsg")).toLowerCase().includes("incorrect"));
 await page.fill("#s-pass", DEMO_PASSWORD);
 await page.click("#signinSubmit"); await page.waitForTimeout(400);
-check("correct demo password signs in", (await text("#navAuth")) === "Signed in");
-await page.click("#signoutBtn"); await page.waitForTimeout(300);
+check("correct demo password signs in", await page.locator("#accountMenu").isVisible());
+await page.click("#avatarBtn"); await page.waitForTimeout(200);
+await page.click("#signoutBtn2"); await page.waitForTimeout(300);
+check("sign out (from avatar dropdown) returns to guest nav", await page.locator("#navAuth").isVisible());
 
 await go("#/forgot-password");
 await page.fill("#fp-email", "someone@example.org");

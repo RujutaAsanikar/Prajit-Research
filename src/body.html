@@ -14,9 +14,16 @@
       <a href="#/home/process" data-nav="process">Process</a>
       <a href="#/home/about" data-nav="about">About</a>
       <a href="#/admin" data-nav="admin" class="admin-link" id="navAdmin" hidden>Admin</a>
-      <a href="#/signup" data-nav="signup" id="navSignup">Create account</a>
       <a href="#/signin" data-nav="signin" id="navAuth">Sign in</a>
-      <a class="btn" href="#/access" data-nav="access">Request access</a>
+      <a class="btn" href="#/signup" data-nav="signup" id="navSignup">Sign up</a>
+      <div class="account-menu" id="accountMenu" hidden>
+        <button type="button" class="avatar-btn" id="avatarBtn" aria-haspopup="true" aria-expanded="false" aria-label="Account menu"></button>
+        <div class="account-dropdown" id="accountDropdown" hidden>
+          <div class="account-dropdown-head"><p class="dname" id="ddName"></p><p class="demail" id="ddEmail"></p></div>
+          <a href="#/account" id="ddSettings">Account settings</a>
+          <button type="button" id="signoutBtn2">Sign out</button>
+        </div>
+      </div>
     </nav>
   </header>
   <div id="demoBar" hidden></div>
