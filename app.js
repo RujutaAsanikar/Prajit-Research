@@ -50,7 +50,7 @@ const SITE_DEFAULTS = {
   plans: [
     { name: "Guest", price: "Free", sub: "No account", featured: false, items: ["Selected notes in full, marked Free", "Disclaimer and methodology pages"], cta: { label: "Browse the library", href: "#/research" } },
     { name: "Member", price: "Free", sub: "Registered account", featured: true, items: ["Everything in Guest", "Summaries of every writeup", "Notes marked Member in full", "Email alert on every new writeup and update"], cta: { label: "Create a member account", href: "#/signup" } },
-    { name: "Subscriber", price: "Pricing on request", sub: "Annual", featured: false, items: ["Everything in Member", "Every initiation and update in full, on publication day", "Downloadable models (xlsx) and the quarterly call"], cta: { label: "Request subscriber access", href: "#/access?plan=subscriber" } }
+    { name: "Subscriber", price: "Not open yet", sub: "Coming later", featured: false, disabled: true, items: ["Everything in Member", "Every initiation and update in full, on publication day", "Downloadable models (xlsx) and the quarterly call"], cta: { label: "Request subscriber access", href: "#/access?plan=subscriber" } }
   ],
   disclaimer: { updated: "September 2026", sections: [
     { h: "Not investment advice", p: "The content of this website, including all research writeups, models, commentary, and communications (collectively, the \"Content\"), is provided for informational and educational purposes only. Nothing on this site constitutes investment, legal, tax, or accounting advice, or a recommendation to buy, sell, or hold any security or financial instrument. You should consult a qualified professional before making any investment decision." },
@@ -909,8 +909,8 @@ async function homeView(){
   <section class="section" id="plans">
     <div class="section-rail"><p class="eyebrow">Access</p><h2>Three ways to read</h2></div>
     <div class="section-body"><div class="plans">${SITE.plans.map(p => `
-      <div class="plan${p.featured ? " featured" : ""}"><p class="eyebrow">${esc(p.name)}</p><div class="price">${esc(p.price)}<small>${esc(p.sub)}</small></div>
-        <ul>${p.items.map(i => `<li>${esc(i)}</li>`).join("")}</ul><a class="btn ${p.featured ? "" : "ghost"}" href="${p.cta.href}">${esc(p.cta.label)}</a></div>`).join("")}</div></div>
+      <div class="plan${p.featured ? " featured" : ""}${p.disabled ? " disabled" : ""}"><p class="eyebrow">${esc(p.name)}</p><div class="price">${esc(p.price)}<small>${esc(p.sub)}</small></div>
+        <ul>${p.items.map(i => `<li>${esc(i)}</li>`).join("")}</ul>${p.disabled ? `<span class="btn ghost disabled" aria-disabled="true">Not open yet</span>` : `<a class="btn ${p.featured ? "" : "ghost"}" href="${p.cta.href}">${esc(p.cta.label)}</a>`}</div>`).join("")}</div></div>
   </section>
   <section class="section" id="about">
     <div class="section-rail"><p class="eyebrow">About</p><h2>Independent, by design</h2></div>
@@ -945,11 +945,13 @@ async function noteView(slug){
   let gate = "";
   if (!entitled){
     const headline = needs === "member" ? "The rest of this writeup is for members." : "The rest of this writeup is for subscribers.";
+    // Subscriber access is paused (greyed out on Plans too) -- no self-serve request path right now, so
+    // this gate explains that instead of inviting a request that can't be honored yet.
     const copy = needs === "member"
       ? (signedIn ? "Your account does not have member access yet." : "Member accounts are free. Sign in with your email and the full note opens immediately.")
-      : (signedIn ? "Subscriber access includes every initiation and update on publication day, the models, and the quarterly call. Request it and we will reply with pricing." : "Subscriber access includes every initiation and update on publication day, the models, and the quarterly call.");
-    const cta = needs === "member" && !signedIn ? `<a class="btn" href="#/signup">Create a free account</a>` : `<a class="btn" href="#/access?plan=${needs}">Request ${needs} access</a>`;
-    gate = `<div class="gate gate-reveal" data-reveal><p class="eyebrow">${ACCESS_LABEL[needs]} access</p><h3>${headline}</h3><p>${copy}</p><div class="cta-row">${cta}${!signedIn && needs === "subscriber" ? `<a class="btn link" href="#/signin">Already a subscriber? Sign in →</a>` : ""}</div></div>`;
+      : "Subscriber access isn't open yet — it will include every initiation and update on publication day, the models, and the quarterly call. We'll announce when it's available.";
+    const cta = needs === "member" ? (!signedIn ? `<a class="btn" href="#/signup">Create a free account</a>` : `<a class="btn" href="#/access?plan=member">Request member access</a>`) : "";
+    gate = `<div class="gate gate-reveal" data-reveal><p class="eyebrow">${ACCESS_LABEL[needs]} access</p><h3>${headline}</h3><p>${copy}</p>${cta || (!signedIn && needs === "subscriber") ? `<div class="cta-row">${cta}${!signedIn && needs === "subscriber" ? `<a class="btn link" href="#/signin">Already have subscriber access? Sign in →</a>` : ""}</div>` : ""}</div>`;
   }
   const hasPdf = entitled && !!n.file_path;
   const pdfBlock = hasPdf ? `<div class="pdf-viewer" id="pdfViewer" data-path="${esc(n.file_path)}"></div>` : "";
@@ -984,9 +986,10 @@ async function noteView(slug){
 }
 
 function accessView(q){
-  const plan = ["member", "subscriber"].includes(q.get("plan")) ? q.get("plan") : "member";
+  // Subscriber requests are paused for now (greyed out on the Plans section too) -- member is the only
+  // self-serve path while that's true, so this form only ever submits a member request.
   return `
-  ${pageHead("Request access", "Tell us who you are and what you read", "Member accounts are free — you can also create one instantly on the sign-in page. Subscriber requests receive pricing and a sample note by reply.")}
+  ${pageHead("Request access", "Tell us who you are and what you read", "Member accounts are free — you can also create one instantly on the sign-in page.")}
   <section class="split">
     <div class="section-rail"><p class="note-box">We do not sell or share reader information. Your request goes only to the research desk.</p></div>
     <form class="form" id="accessForm" novalidate>
@@ -994,10 +997,7 @@ function accessView(q){
         <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" type="text" autocomplete="name" placeholder="Full name" required value="${esc(auth?.profile.full_name || "")}"></div>
         <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@firm.com" required value="${esc(auth?.user.email || "")}"></div>
       </div>
-      <div class="two">
-        <div class="field"><label for="f-firm">Firm (optional)</label><input id="f-firm" name="firm" type="text" autocomplete="organization" placeholder="Fund, family office, or independent" value="${esc(auth?.profile.firm || "")}"></div>
-        <div class="field"><label for="f-plan">Access requested</label><select id="f-plan" name="plan"><option value="member" ${plan === "member" ? "selected" : ""}>Member — free account</option><option value="subscriber" ${plan === "subscriber" ? "selected" : ""}>Subscriber — full library</option></select></div>
-      </div>
+      <div class="field"><label for="f-firm">Firm (optional)</label><input id="f-firm" name="firm" type="text" autocomplete="organization" placeholder="Fund, family office, or independent" value="${esc(auth?.profile.firm || "")}"></div>
       <div class="field"><label for="f-note">What are you looking for? (optional)</label><textarea id="f-note" name="note" placeholder="Sectors you follow, how you use independent research, anything else useful"></textarea></div>
       <div class="cta-row"><button class="btn" type="submit" id="accessSubmit">Send request</button></div>
       <div id="formMsg" hidden></div>
@@ -1091,7 +1091,7 @@ function accountView(){
         <div><dt>Access level</dt><dd>${p.is_admin ? `<span class="pill ok">Admin</span>` : accessPill(p.tier)}</dd></div>
         <div><dt>Member since</dt><dd>${fmtDate(p.created_at)}</dd></div>
       </dl>
-      ${p.is_admin ? `<a class="btn" href="#/admin">Open admin</a>` : (p.tier !== "subscriber" ? `<a class="btn ghost" href="#/access?plan=subscriber">Request subscriber access</a>` : "")}
+      ${p.is_admin ? `<a class="btn" href="#/admin">Open admin</a>` : ""}
     </div>
     <div>
       <form class="form" id="profileForm" novalidate>
@@ -1214,9 +1214,44 @@ async function adminEdit(slug){
         <div class="field"><label for="e-status">Status</label><select id="e-status" name="status"><option value="draft" ${n.status === "draft" ? "selected" : ""}>Draft — hidden from readers</option><option value="published" ${n.status === "published" ? "selected" : ""}>Published</option></select></div>
       </div>
       <div class="field"><label for="e-kill">Kill condition triggered on</label><input id="e-kill" name="kill_triggered_at" type="date" value="${esc(n.kill_triggered_at || "")}"><span class="hint">Leave blank while the thesis holds. Shown on the writeup as "Not triggered" / "Triggered on [date]".</span></div>
-      <div class="cta-row"><button class="btn" type="submit" id="saveBtn">Save</button>${isNew ? "" : `<button class="btn danger sm" type="button" data-del="${esc(n.id)}">Delete</button>`}<span class="small muted" id="saveState"></span></div>
+      <div class="cta-row"><button class="btn" type="submit" id="saveBtn">Save</button><button class="btn ghost" type="button" id="previewBtn">Preview</button>${isNew ? "" : `<button class="btn danger sm" type="button" data-del="${esc(n.id)}">Delete</button>`}<span class="small muted" id="saveState"></span></div>
       <div id="formMsg" hidden></div>
-    </form>`);
+    </form>
+    <div id="editPreview" hidden></div>`);
+}
+
+// Renders the draft exactly as an entitled reader would see the published note — same markup, same
+// CSS classes as noteView() — from whatever's currently typed in the editor, without saving it.
+function renderEditPreview(f){
+  const title = (f.get("title") || "").trim() || "Untitled writeup", summary = (f.get("summary") || "").trim();
+  const sector = (f.get("sector") || "").trim(), type = f.get("type"), access = f.get("access"), status = f.get("status");
+  const pub = f.get("published_at") || "", kill = f.get("kill_triggered_at") || "", bodyText = f.get("body") || "";
+  const file = f.get("file");
+  return `
+    <div class="admin-head"><h3>Preview</h3><button class="btn ghost sm" type="button" id="closePreview">← Back to editing</button></div>
+    <p class="small muted">Shown as it will look to a reader with ${esc(ACCESS_LABEL[access])} access or higher. Nothing is saved by viewing this.</p>
+    <div class="hairline-frame">
+      <section class="note-head" data-reveal-group>
+        <p class="eyebrow">${esc(type)} · ${esc(sector)}${status === "draft" ? " · Draft (only admins can see this)" : ""}</p>
+        <h1 class="note-title">${esc(title)}</h1>
+        <p class="lede">${esc(summary)}</p>
+        <dl class="meta">
+          <div><dt>Published</dt><dd>${fmtDate(pub)}</dd></div>
+          <div><dt>Sector</dt><dd>${esc(sector)}</dd></div>
+          <div><dt>Type</dt><dd>${esc(type)}</dd></div>
+          <div><dt>Access</dt><dd>${accessPill(access, status)}</dd></div>
+          <div><dt>Kill condition</dt><dd>${kill ? `Triggered on ${fmtDate(kill)}` : "Not triggered"}</dd></div>
+        </dl>
+      </section>
+      <section class="note-body">
+        <div class="section-rail"><p class="eyebrow">Writeup</p></div>
+        <div>
+          <div class="prose">${renderBody(bodyText)}</div>
+          ${file && file.size > 0 ? `<p class="small muted pdf-note">A document is attached — entitled readers will also see the protected viewer for it here; previewing an uploaded file isn't shown in this draft view.</p>` : ""}
+          <p class="disclosure">Disclosure: Prajit Research and its principals may hold positions in securities discussed and may trade them without notice. This writeup is not investment advice. See the <a href="#/disclaimer">Disclaimer</a> and <a href="#/copyright">Copyright</a> terms.</p>
+        </div>
+      </section>
+    </div>`;
 }
 
 async function adminMembers(){
@@ -1402,7 +1437,7 @@ function wire(r){
     if (!name || !validEmail(email)) return showMsg(`<p class="err">Add your name and a valid email address so we can reply.</p>`);
     const btn = document.getElementById("accessSubmit"); btn.disabled = true;
     try {
-      await store.createRequest({ name, email, firm: (f.get("firm") || "").trim(), plan: f.get("plan") === "subscriber" ? "subscriber" : "member", note: (f.get("note") || "").trim() });
+      await store.createRequest({ name, email, firm: (f.get("firm") || "").trim(), plan: "member", note: (f.get("note") || "").trim() });
       af.querySelectorAll("input,textarea,select,button").forEach(el => el.disabled = true);
       showMsg(`<div class="ok"><p class="eyebrow bare">Request received</p><p>Thank you. We reply within two business days${CFG.contactEmail ? ` from ${esc(CFG.contactEmail)}` : ""}.${store.mode === "demo" ? " (Demo mode: this request is visible in the admin Requests tab for this session only.)" : ""}</p></div>`);
     } catch (err) { btn.disabled = false; showMsg(`<p class="err">Could not send: ${esc(err.message)}</p>`); }
@@ -1520,6 +1555,19 @@ function wire(r){
         const saved = await store.saveNote(note, f.get("body") || "");
         toast("Saved"); location.hash = `#/admin/edit/${saved.slug}`; render();
       } catch (err) { btn.disabled = false; document.getElementById("saveState").textContent = ""; showMsg(`<p class="err">Could not save: ${esc(err.message)}</p>`); }
+    });
+    const previewBtn = document.getElementById("previewBtn"), previewPane = document.getElementById("editPreview");
+    previewBtn.addEventListener("click", () => {
+      previewPane.innerHTML = renderEditPreview(new FormData(ef));
+      document.documentElement.dataset.section = ""; // show the real public theme while previewing, not the dark admin skin
+      ef.hidden = true; previewPane.hidden = false;
+      window.scrollTo(0, 0);
+      if (window.Motion) Motion.mount(previewPane);
+    });
+    previewPane.addEventListener("click", e => {
+      if (!e.target.closest("#closePreview")) return;
+      document.documentElement.dataset.section = "admin";
+      previewPane.hidden = true; ef.hidden = false;
     });
   }
 

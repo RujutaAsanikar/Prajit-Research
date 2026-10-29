@@ -59,7 +59,7 @@ check("member reads member note", (await text(".prose")).includes("route density
 await go("#/note/gmm-pfaudler-transformation-thesis");
 check("member still gated on the real subscriber writeup", await page.locator(".gate").count() === 1);
 await go("#/note/regional-banks-deposit-franchises");
-check("member is gated on subscriber note", await page.locator(".gate").count() === 1 && (await text(".gate .btn")).toLowerCase().includes("request subscriber"));
+check("member is gated on subscriber note, with no live request CTA (paused)", await page.locator(".gate").count() === 1 && await page.locator(".gate .btn").count() === 0 && (await text(".gate")).toLowerCase().includes("isn't open yet"));
 check("nav shows Account when signed in", (await text("#navAuth")) === "Account");
 
 // 5. Persona: subscriber
@@ -74,7 +74,7 @@ check("subscriber cannot open admin", (await text("#app h2")).includes("Sign in 
 // 6. Access request as guest → shows in admin
 await page.click('[data-persona=""]'); await page.waitForTimeout(300);
 await go("#/access?plan=subscriber");
-check("plan preselected from link", await page.locator("#f-plan").inputValue() === "subscriber");
+check("access form has no plan selector (subscriber requests paused, member-only for now)", await page.locator("#f-plan").count() === 0);
 await page.fill("#f-name", "Test Reader"); await page.fill("#f-email", "reader@example.org"); await page.fill("#f-note", "Financials");
 await page.click("#accessSubmit"); await page.waitForTimeout(300);
 check("request confirmation shown", (await text("#formMsg")).includes("Request received"));
