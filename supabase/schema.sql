@@ -444,3 +444,42 @@ create policy "site_content admin write" on public.site_content for all
 
 grant select on public.site_content to anon, authenticated;
 grant all on public.site_content to authenticated;
+
+-- ---------------------------------------------------------------------
+-- 14. Keep admin_emails and profiles.is_admin in sync. Previously, adding
+--     someone to admin_emails only granted the flag if they signed up
+--     AFTER being added (handle_new_user() only checks the allowlist once,
+--     at signup) -- an account created first and added to the allowlist
+--     afterward never got admin. This closes that gap both ways: adding an
+--     email now grants admin to any existing matching account immediately,
+--     and removing one revokes it.
+-- ---------------------------------------------------------------------
+create or replace function public.guard_profile_update() returns trigger
+language plpgsql set search_path = public as $$
+begin
+  -- auth.uid() is only ever null for a trusted direct-database connection (a migration, the SQL
+  -- editor, the sync trigger below) -- RLS already blocks an ordinary unprivileged request before it
+  -- gets here, so skipping the check in that case doesn't relax anything the web app itself can do.
+  if auth.uid() is not null and not public.is_admin()
+     and (new.tier is distinct from old.tier or new.is_admin is distinct from old.is_admin
+          or new.email is distinct from old.email or new.id is distinct from old.id) then
+    raise exception 'Only an admin can change access level';
+  end if;
+  return new;
+end;
+$$;
+
+create or replace function public.sync_admin_flag() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  if tg_op = 'INSERT' then
+    update public.profiles set is_admin = true where lower(email) = lower(new.email);
+  elsif tg_op = 'DELETE' then
+    update public.profiles set is_admin = false where lower(email) = lower(old.email);
+  end if;
+  return null;
+end;
+$$;
+drop trigger if exists admin_emails_sync on public.admin_emails;
+create trigger admin_emails_sync after insert or delete on public.admin_emails
+  for each row execute procedure public.sync_admin_flag();
