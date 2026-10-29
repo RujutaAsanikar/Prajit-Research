@@ -1,36 +1,18 @@
 /* Prajit Research — site styles
-   Tokens: light (default), dark via prefers-color-scheme and data-theme. */
+   Light theme only, fixed — no dark mode, no prefers-color-scheme override. */
 :root{
-  --ground:#F3EEE3; --ground-2:#EBE4D3; --ink:#1C1A16; --ink-2:#5E5749; --ink-3:#877F6E;
-  --rule:#D8CFBC; --rule-strong:#B9AE96;
-  --gold:#9E7D1E; --gold-ink:#7C6216; --gold-tint:#EEE4C6;
-  --btn-bg:#7C6216; --btn-fg:#F6F1E6; --btn-bg-hover:#65500F;
+  --ground:#F6F0E4; --ground-2:#EDE3D1; --ink:#2A1B12; --ink-2:#5A4434; --ink-3:#6E5A47;
+  --rule:#DDCFB8; --rule-strong:#BFAE92;
+  --gold:#8A5530; --gold-ink:#8A5530; --gold-tint:#F0E2CD;
+  --btn-bg:#6E4223; --btn-fg:#FBF6EC; --btn-bg-hover:#573319;
   --ok:#3E6B3A; --warn:#8A5A12; --bad:#8C2F2F;
   --serif:"Newsreader", Georgia, "Times New Roman", serif;
   --mono:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --max:1120px; --measure:62ch;
   --ease-out:cubic-bezier(.16,1,.3,1); --ease-in-out:cubic-bezier(.65,0,.35,1);
   --dur-fast:180ms; --dur-base:320ms; --dur-slow:560ms; --dur-page:320ms;
-  --shadow-sm:0 1px 2px rgba(28,26,22,.06); --shadow-md:0 8px 24px -8px rgba(28,26,22,.18);
+  --shadow-sm:0 1px 2px rgba(42,27,18,.08); --shadow-md:0 8px 24px -8px rgba(42,27,18,.22);
   color-scheme:light;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --ground:#161410; --ground-2:#1F1C16; --ink:#EDE6D6; --ink-2:#B3AA97; --ink-3:#8A8272;
-    --rule:#2F2B23; --rule-strong:#4A4335;
-    --gold:#CDAA4E; --gold-ink:#D9BA62; --gold-tint:#2A2414;
-    --btn-bg:#CDAA4E; --btn-fg:#161410; --btn-bg-hover:#DDBB5E;
-    --ok:#8FBF88; --warn:#D9A54A; --bad:#D98484;
-    color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --ground:#161410; --ground-2:#1F1C16; --ink:#EDE6D6; --ink-2:#B3AA97; --ink-3:#8A8272;
-  --rule:#2F2B23; --rule-strong:#4A4335;
-  --gold:#CDAA4E; --gold-ink:#D9BA62; --gold-tint:#2A2414;
-  --btn-bg:#CDAA4E; --btn-fg:#161410; --btn-bg-hover:#DDBB5E;
-  --ok:#8FBF88; --warn:#D9A54A; --bad:#D98484;
-  color-scheme:dark;
 }
 
 *,*::before,*::after{box-sizing:border-box}

@@ -1,18 +1,10 @@
 /* Prajit Research — admin dashboard theme.
    Scoped entirely under :root[data-section="admin"] (set by app.js only while r.view === "admin").
-   Always dark, independent of the reader's OS light/dark preference — a real software-dashboard
-   feel deliberately distinct from the public site's warm editorial identity. Reuses every existing
-   component class (.tiles, table.t, .pill, .btn, .field, .admin-nav...) via the same custom-property
-   mechanism the site's own dark mode already uses — no admin view function needed to change. */
+   Same light palette as the public site (no separate color tokens here) — the distinct "software
+   dashboard" feel now comes only from the Inter font, denser rows, and border-radius below, not from
+   color. Reuses every existing component class (.tiles, table.t, .pill, .btn, .field, .admin-nav...). */
 :root[data-section="admin"]{
-  --ground:#0B0D10; --ground-2:#12151A; --ink:#E6E9ED; --ink-2:#9AA4B2; --ink-3:#6B7480;
-  --rule:#1E232B; --rule-strong:#2C333D;
-  --gold:#4C8DFF; --gold-ink:#4C8DFF; --gold-tint:#101825;
-  --btn-bg:#4C8DFF; --btn-fg:#0B0D10; --btn-bg-hover:#6FA3FF;
-  --ok:#3DDC97; --warn:#F5A623; --bad:#FF5C5C;
   --serif:"Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --shadow-sm:0 1px 2px rgba(0,0,0,.3); --shadow-md:0 12px 28px -10px rgba(0,0,0,.55);
-  color-scheme:dark;
 }
 
 /* Radius is used nowhere on the public site — reserved as an admin-only signal of "this is software." */
