@@ -30,6 +30,7 @@ const text = async (sel) => (await page.locator(sel).allTextContents()).join(" |
 await go("#/");
 check("home renders hero", (await text("h1")).includes("Patient research"));
 check("demo bar visible", await page.locator("#demoBar .demo").isVisible());
+check("nav shows Create account + Sign in for a guest", await page.locator("#navSignup").isVisible() && (await text("#navSignup")) === "Create account" && (await text("#navAuth")) === "Sign in");
 check("home shows 4 latest writeups", await page.locator("#research .row").count() === 4);
 
 // 2. Library as guest
@@ -60,7 +61,10 @@ await go("#/note/gmm-pfaudler-transformation-thesis");
 check("member still gated on the real subscriber writeup", await page.locator(".gate").count() === 1);
 await go("#/note/regional-banks-deposit-franchises");
 check("member is gated on subscriber note, with no live request CTA (paused)", await page.locator(".gate").count() === 1 && await page.locator(".gate .btn").count() === 0 && (await text(".gate")).toLowerCase().includes("isn't open yet"));
-check("nav shows Account when signed in", (await text("#navAuth")) === "Account");
+check("nav shows Signed in when signed in", (await text("#navAuth")) === "Signed in");
+check("nav hides Create account once signed in", !(await page.locator("#navSignup").isVisible()));
+await go("#/account");
+check("account page says You're signed in", (await text("#app .eyebrow")).includes("Signed in"));
 
 // 5. Persona: subscriber
 await page.click('[data-persona="subscriber"]'); await page.waitForTimeout(300);
@@ -97,7 +101,7 @@ await page.click("#signinSubmit"); await page.waitForTimeout(300);
 check("wrong password shows generic error", (await text("#formMsg")).toLowerCase().includes("incorrect"));
 await page.fill("#s-pass", DEMO_PASSWORD);
 await page.click("#signinSubmit"); await page.waitForTimeout(400);
-check("correct demo password signs in", (await text("#navAuth")) === "Account");
+check("correct demo password signs in", (await text("#navAuth")) === "Signed in");
 await page.click("#signoutBtn"); await page.waitForTimeout(300);
 
 await go("#/forgot-password");

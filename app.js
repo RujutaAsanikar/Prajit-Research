@@ -822,9 +822,10 @@ async function boot(){
 }
 
 function renderChrome(){
-  const navAuth = document.getElementById("navAuth"), navAdmin = document.getElementById("navAdmin");
-  navAuth.textContent = auth ? "Account" : "Sign in";
+  const navAuth = document.getElementById("navAuth"), navAdmin = document.getElementById("navAdmin"), navSignup = document.getElementById("navSignup");
+  navAuth.textContent = auth ? "Signed in" : "Sign in";
   navAuth.setAttribute("href", auth ? "#/account" : "#/signin");
+  navSignup.hidden = !!auth; // only a guest needs "Create account" — a signed-in reader already has one
   navAdmin.hidden = !(auth && auth.profile.is_admin);
   const bar = document.getElementById("demoBar");
   if (store.mode === "demo"){
@@ -846,7 +847,7 @@ function route(){
 
 function setNav(view){
   document.querySelectorAll("[data-nav]").forEach(a => {
-    const on = a.dataset.nav === view || (["account", "signup", "forgot-password", "reset-password"].includes(view) && a.dataset.nav === "signin");
+    const on = a.dataset.nav === view || (["account", "forgot-password", "reset-password"].includes(view) && a.dataset.nav === "signin");
     if (on) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
   });
   document.getElementById("nav").classList.remove("open");
@@ -1083,7 +1084,7 @@ function accountView(){
   if (!auth) return signinView(new URLSearchParams());
   const p = auth.profile;
   return `
-  ${pageHead("Account", p.full_name || auth.user.email, "")}
+  ${pageHead("Signed in", p.full_name || auth.user.email, `You're signed in as ${auth.user.email}.`)}
   <section class="split">
     <div class="section-rail">
       <dl class="meta single-col">
