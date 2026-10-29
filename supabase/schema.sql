@@ -16,7 +16,8 @@ create table if not exists public.admin_emails (
 );
 insert into public.admin_emails (email) values
   ('ruju25a@gmail.com'),
-  ('prajitresearch@gmail.com')
+  ('prajitresearch@gmail.com'),
+  ('generallogin2abhijit@gmail.com')
 on conflict do nothing;
 
 -- ---------------------------------------------------------------------

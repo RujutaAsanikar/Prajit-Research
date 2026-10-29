@@ -2,7 +2,7 @@
 
 Everything in this folder is finished and already set to your details:
 
-- Admins: **ruju25a@gmail.com** and **prajitresearch@gmail.com** (nobody else can ever open the admin page)
+- Admins: **ruju25a@gmail.com**, **prajitresearch@gmail.com**, and **generallogin2abhijit@gmail.com** (nobody else can ever open the admin page)
 - Domain: **prajitresearch.com**
 - Contact email shown on the site: prajitresearch@gmail.com
 
@@ -58,10 +58,10 @@ Nothing to do here. If you ever need to double-check it's running: repository �
 
 ## Step 5 — First sign-in (makes you admin)
 
-1. On prajitresearch.com click **Sign in** → **Create account** → sign up with `ruju25a@gmail.com` (or the prajitresearch one) and a password.
+1. On prajitresearch.com click **Sign in** → **Create account** → sign up with `ruju25a@gmail.com` (or one of the other two admin emails) and a password.
 2. Check that inbox and click the confirmation link — you land back on the site, signed in; **Admin** appears in the top menu. (If email confirmation isn't set up yet — see Step 6 — you may be signed in immediately instead; that's fine too.)
 3. **Admin → Writeups**: there is one example draft. Edit or delete it, then add real writeups. For each: title, summary (everyone sees this), body (only entitled readers see this), sector, type, **who can read it** (Free / Member / Subscriber), optional PDF, and **Status = Published** when ready.
-4. Abhijit signs up the same way with prajitresearch@gmail.com and is also admin.
+4. Abhijit signs up the same way with `generallogin2abhijit@gmail.com` and is also admin.
 
 ## Step 6 — Before real readers arrive
 
@@ -94,7 +94,7 @@ There is no card payment on the site yet. When someone pays you (invoice, bank t
 
 | Abhijit's requirement | How it is enforced |
 |---|---|
-| Admin login | Email+password sign-in; only the two listed emails get the admin flag; the database refuses to let anyone else set it |
+| Admin login | Email+password sign-in; only the three listed emails get the admin flag; the database refuses to let anyone else set it |
 | Reader passwords | Handled entirely by Supabase Auth — passwords are hashed there and never stored in, or visible to, this site's own database |
 | Upload / edit / manage documents | Admin desk; PDFs go to a private storage area only entitled readers can download |
 | Customer access management | Admin → Members (change level), Admin → Requests (approve/decline) |
